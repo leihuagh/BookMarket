@@ -1,4 +1,3 @@
-# входные параметры
 def menu():
     main_menu = '1. Просмотреть всех пользователей\n' \
                 '2. Добавить пользователя\n' \
@@ -6,7 +5,6 @@ def menu():
                 '4. Выбрать пользователя\n'\
                 '0. Выход'
     print(main_menu)
-    global choice
     choice = int(input('Выберете пункт меню: '))
     return choice
 
@@ -14,18 +12,19 @@ def menu():
 users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
 
 while True:
-    menu()
+    choice = menu()
 
     if choice == 1:
-        for key, value in users.items():
-            print('\n--Имя--\n' + key, '\n--Информация--\n', value, '\n')
+        users_list = []
+        [users_list.append(key) for key in users.keys()]
+        print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
 
     if choice == 2:
         name = input('Введите Ваше имя: ')
         age = int(input('Введите Ваш возраст: '))
         sex = input('Пол М/Ж: ').upper()
         while True:
-            if sex == 'М' or sex == 'Ж':  # ждем от пользователя строго ввода "М" или "Ж"
+            if sex == 'М' or sex == 'Ж':
                 break
             else:
                 print('Поле "Пол" должно содержать либо "м" либо "ж"')
@@ -45,6 +44,13 @@ while True:
         else:
             users.update({name: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
             print('\nПользователь {} успешно добавлен\n'.format(name))
+
+    if choice == 3:
+        selected_users = input('\nвведите имя пользователя, которого необходимо удалить\n'
+                               'или нажмите Enter для выхода в главное меню: ')
+        if selected_users == '':
+            continue
+        users.pop(selected_users, print('Такого пользователя не существует\n'))
 
     if choice == 0:
         break
