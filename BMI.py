@@ -1,4 +1,15 @@
 # входные параметры
+def menu():
+    main_menu = {
+                1, 'Добавить',
+                2, 'Удалить',
+                3, 'Изменить'
+                }
+    for i in main_menu:
+        print(i)
+
+menu()
+
 name = input('Введите Ваше имя: ')
 age = int(input('Введите Ваш возраст: '))
 
@@ -96,6 +107,8 @@ elif age > 26:
             print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_MALE))
         else:
             print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_FEMALE))
+else:
+    print('Вы еще слишком малы для таких забот')
 
 
 # построение псевдографика:
