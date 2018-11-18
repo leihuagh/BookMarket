@@ -1,33 +1,62 @@
 # входные параметры
 def menu():
-    main_menu = {
-                1, 'Добавить',
-                2, 'Удалить',
-                3, 'Изменить'
-                }
-    for i in main_menu:
-        print(i)
+    main_menu = '1. Просмотреть всех пользователей\n' \
+                '2. Добавить пользователя\n' \
+                '3. Удалить пользователя\n' \
+                '4. Выбрать пользователя\n'\
+                '0. Выход'
+    print(main_menu)
+    global choice
+    choice = int(input('Выберете пункт меню: '))
+    return choice
 
-menu()
 
-name = input('Введите Ваше имя: ')
-age = int(input('Введите Ваш возраст: '))
+users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
 
-sex = input('Пол М/Ж: ').upper()
 while True:
-    if sex == 'М' or sex == 'Ж': # ждем от пользователя строго ввода "М" или "Ж"
-        break
-    else:
-        print('Поле "Пол" должно содержать либо "м" либо "ж"')
-        sex = input('Пол М/Ж: ').upper()
+    menu()
 
-weight = int(input('Введите Ваш вес в кг: '))
-height = int(input('Введите Ваш рост в см: '))
+    if choice == 1:
+        for key, value in users.items():
+            print('\n--Имя--\n' + key, '\n--Информация--\n', value, '\n')
+
+    if choice == 2:
+        name = input('Введите Ваше имя: ')
+        age = int(input('Введите Ваш возраст: '))
+        sex = input('Пол М/Ж: ').upper()
+        while True:
+            if sex == 'М' or sex == 'Ж':  # ждем от пользователя строго ввода "М" или "Ж"
+                break
+            else:
+                print('Поле "Пол" должно содержать либо "м" либо "ж"')
+                sex = input('Пол М/Ж: ').upper()
+        weight = int(input('Введите Ваш вес в кг: '))
+        height = int(input('Введите Ваш рост в см: '))
+        if len(users) == 0:
+            users = {
+                name: {
+                    'возраст': age,
+                    'пол': sex,
+                    'вес': weight,
+                    'рост': height
+                }
+                }
+            print('Пользователь {} успешно добавлен'.format(name))
+        else:
+            users.update({name: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
+            print('\nПользователь {} успешно добавлен\n'.format(name))
+
+    if choice == 0:
+        break
+
+print(users)
+
+"""
 greeting = ''
 RECOMENDATION_BAD = 'Все очень плохо. И тут даже не до шуток. ' \
                     'Рекомендуем повышение веса и лечение анерексии. ' \
                     'ВЫСОКИЙ риск угрозы здоровью.'
-RECOMENDATION_NOT_BAD = 'ОТСУТСТВУЕТ риск для здоровья. '\
+RECOMENDATION_NOT_BAD = 'ОТСУТСТВУЕТ риск для здоровья. ' \
                         'Однако все же непобходимо чуть-чуть больше кушать.'
 RFECOMENDATION_NORM = 'Все прекрасно. Можете сосредоточиться ' \
                       'для достижения других жизненных целей)'
@@ -53,16 +82,17 @@ elif sex == 'Ж':
 
 # вывод на экран с помощью .format
 print('\n\n' + greeting.format(name), '\n'
-      'Ваш рост: {}'.format(height), '\n'
-      'Ваш вес: {}'.format(weight), '\n'
-      'Ваш BMI: {}'.format(round(bmi, 2)))
+                                      'Ваш рост: {}'.format(height), '\n'
+                                                                     'Ваш вес: {}'.format(weight), '\n'
+                                                                                                   'Ваш BMI: {}'.format(
+    round(bmi, 2)))
 
 # вывод на экран просто переменных
 print('\n====Рекомендация====\n'
       ' - пол:', sex, '\n'
-      ' - возраст:', age, '\n'
-      ' - рост', height, '\n'
-      ' - вес', weight, '\n\n')
+                      ' - возраст:', age, '\n'
+                                          ' - рост', height, '\n'
+                                                             ' - вес', weight, '\n\n')
 
 # рекомендации-константы;)
 if 18 < age < 26:
@@ -110,7 +140,6 @@ elif age > 26:
 else:
     print('Вы еще слишком малы для таких забот')
 
-
 # построение псевдографика:
 # строка в список. Добавляю "X" в соответствии со значением bmi
 # список в строку
@@ -122,3 +151,4 @@ else:
     graph.insert(int(bmi), 'X')
 print("\nПсевдографик:",
       ''.join(graph))
+"""
