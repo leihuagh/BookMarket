@@ -51,6 +51,19 @@ while True:
         if selected_users == '':
             continue
         users.pop(selected_users, print('Такого пользователя не существует\n'))
+    
+    if choice == 4:
+        users_list = []
+        [users_list.append(key) for key in users.keys()]
+        print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
+        selected_users = input('введите имя пользователя для просмотра информации о нем: ')
+        for key in users.keys():
+            if key == selected_users:
+                print(users.values())
+            else:
+                print('Пользователя с таким именем не существует')
+
+
 
     if choice == 0:
         break
