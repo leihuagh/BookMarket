@@ -36,7 +36,6 @@ def recomendation(user):
     RECOMENDATION_FOR_FEMALE = 'Юная леди, Вам еще детей рожать'
 
     # формула для расчета ИМТ (делим рост на 100, что бы расчеты были верны)
-
     weight = users[user]['вес']
     height = users[user]['рост']
     sex = users[user]['пол']
@@ -44,24 +43,23 @@ def recomendation(user):
     bmi = weight / ((height / 100) ** 2)
 
     # Обращение по полу
-    if sex == 'М':
+    if sex.upper() == 'М':
         greeting = 'Уважаемый {}'
-    elif sex == 'Ж':
+    elif sex.upper() == 'Ж':
         greeting = 'Уважаемая {}'
 
     # вывод на экран с помощью .format
     print('\n\n' + greeting.format(user), '\n'
-                                          'Ваш рост: {}'.format(height), '\n'
-                                                                         'Ваш вес: {}'.format(weight), '\n'
-                                                                                                       'Ваш BMI: {}'.format(
-        round(bmi, 2)))
+          'Ваш рост: {}'.format(height), '\n'
+          'Ваш вес: {}'.format(weight), '\n'
+          'Ваш BMI: {}'.format(round(bmi, 2)))
 
     # вывод на экран просто переменных
     print('\n====Рекомендация====\n'
           ' - пол:', sex, '\n'
-                          ' - возраст:', age, '\n'
-                                              ' - рост', height, '\n'
-                                                                 ' - вес', weight, '\n\n')
+          ' - возраст:', age, '\n'
+          ' - рост', height, '\n'
+          ' - вес', weight, '\n\n')
 
     # рекомендации-константы;)
     if 18 < age < 26:
