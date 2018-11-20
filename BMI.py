@@ -1,11 +1,22 @@
 import pprint
 
-users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
+# users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
 
 try:
     users
 except NameError:
     users = {}
+
+
+# функция проверяет введенные пользователем данные на принадлежность к "числу"
+# не успел применить ее ко всем параметрам, где нужно ввести число !!!!!!!!!!!!!!!!!!!!!!
+def isnum(param):
+    while True:
+        value = input('Введите ' + param)
+        if value.isnumeric():
+            return value
+        else:
+            print(param, '- числовой параметр ')
 
 
 # функция для отображения главного меню. Возвращает выбранный пункт меню
@@ -56,16 +67,17 @@ def recomendation(user):
 
     # вывод на экран с помощью .format
     print('\n\n' + greeting.format(user), '\n'
-          'Ваш рост: {}'.format(height), '\n'
-          'Ваш вес: {}'.format(weight), '\n'
-          'Ваш BMI: {}'.format(round(bmi, 2)))
+                                          'Ваш рост: {}'.format(height), '\n'
+                                                                         'Ваш вес: {}'.format(weight), '\n'
+                                                                                                       'Ваш BMI: {}'.format(
+        round(bmi, 2)))
 
     # вывод на экран просто переменных
     print('\n====Рекомендация====\n'
           ' - пол:', sex, '\n'
-          ' - возраст:', age, '\n'
-          ' - рост', height, '\n'
-          ' - вес', weight, '\n\n')
+                          ' - возраст:', age, '\n'
+                                              ' - рост', height, '\n'
+                                                                 ' - вес', weight, '\n\n')
 
     # рекомендации-константы;)
     if 18 <= age < 26:
@@ -130,7 +142,7 @@ def list_users(users):
 # возвращает обновленный словарь
 def add_user(users):
     name = input('Введите имя: ')
-    age = int(input('Введите возраст: '))
+    age = isnum('возраст ')
     sex = input('Пол М/Ж: ').upper()
     while True:
         if sex == 'М' or sex == 'Ж':
@@ -138,8 +150,8 @@ def add_user(users):
         else:
             print('Поле "Пол" должно содержать либо "м" либо "ж"')
             sex = input('Пол М/Ж: ').upper()
-    weight = int(input('Введите вес в кг: '))
-    height = int(input('Введите рост в см: '))
+    weight = isnum('вес в кг ')
+    height = isnum('рост в см ')
     if len(users) == 0:
         users = {
             name: {
@@ -174,7 +186,6 @@ def del_user(users):
 # Функция редактирования пользователя. На вход принимает словарь
 # возвращает обновленный словарь
 def edit_user(users):
-    
     # Вывод на экран существующий пользователей
     users_list = []
     [users_list.append(key) for key in users.keys()]
@@ -188,8 +199,8 @@ def edit_user(users):
                 print()
                 pprint.pprint(users.get(selected_users))
                 print('\n1. Расчитать BMI пользователя'
-                    '\n2. Обновить информацию о пользователе\n' 
-                    '0. Выход в главное меню\n')
+                      '\n2. Обновить информацию о пользователе\n'
+                      '0. Выход в главное меню\n')
                 local_choice = int(input())
 
                 if local_choice == 0:
