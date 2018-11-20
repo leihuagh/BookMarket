@@ -1,6 +1,6 @@
 import pprint
 
-#users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
+users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
 
 try:
     users
@@ -149,7 +149,7 @@ def add_user(users):
                 'рост': height
             }
         }
-        print('Пользователь {} успешно добавлен'.format(name))
+        print('\nПользователь {} успешно добавлен'.format(name))
         return users
     else:
         users.update({name: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
@@ -180,38 +180,42 @@ def edit_user(users):
     [users_list.append(key) for key in users.keys()]
     print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
 
-    # выход в главное меню, добавление рекомендации, и обновление данных пользователя
-    selected_users = input('введите имя пользователя для просмотра информации о нем: ')
-    for key in users.keys():
-        if key == selected_users:
-            print()
-            pprint.pprint(users.get(selected_users))
-            print('\n1. Расчитать BMI пользователя'
-                  '\n2. Обновить информацию о пользователе\n' 
-                  '0. Выход в главное меню\n')
-            local_choice = int(input())
+    if len(users_list) != 0:
+        # выход в главное меню, добавление рекомендации, и обновление данных пользователя
+        selected_users = input('введите имя пользователя для просмотра информации о нем: ')
+        for name in users_list:
+            if name == selected_users:
+                print()
+                pprint.pprint(users.get(selected_users))
+                print('\n1. Расчитать BMI пользователя'
+                    '\n2. Обновить информацию о пользователе\n' 
+                    '0. Выход в главное меню\n')
+                local_choice = int(input())
 
-            if local_choice == 0:
-                break
+                if local_choice == 0:
+                    break
 
-            elif local_choice == 1:
-                recomendation(selected_users)
+                elif local_choice == 1:
+                    recomendation(selected_users)
 
-            elif local_choice == 2:
-                age = int(input('Введите возраст: '))
-                sex = input('Пол М/Ж: ').upper()
-                while True:
-                    if sex == 'М' or sex == 'Ж':
-                        break
-                    else:
-                        print('Поле "Пол" должно содержать либо "м" либо "ж"')
-                        sex = input('Пол М/Ж: ').upper()
-                weight = int(input('Введите вес в кг: '))
-                height = int(input('Введите рост в см: '))
-                users.update({selected_users: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
-                print('\nПользователь {} успешно отредактирован\n'.format(selected_users))
-
-    return users
+                elif local_choice == 2:
+                    age = int(input('Введите возраст: '))
+                    sex = input('Пол М/Ж: ').upper()
+                    while True:
+                        if sex == 'М' or sex == 'Ж':
+                            break
+                        else:
+                            print('Поле "Пол" должно содержать либо "м" либо "ж"')
+                            sex = input('Пол М/Ж: ').upper()
+                    weight = int(input('Введите вес в кг: '))
+                    height = int(input('Введите рост в см: '))
+                    users.update({selected_users: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
+                    print('\nПользователь {} успешно отредактирован\n'.format(selected_users))
+            else:
+                print('\nПользователя ' + str(selected_users) + ' не существует\n')
+    else:
+        print('в базе нет ни одного пользователя')
+        return users
 
 
 # цикл для работы программы
