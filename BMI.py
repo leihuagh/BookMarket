@@ -1,10 +1,11 @@
 import pprint
 
 #users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
+
 try:
-    users = {}
+    users
 except NameError:
-    users = None
+    users = {}
 
 
 # функция для отображения главного меню. Возвращает выбранный пункт меню
