@@ -1,20 +1,25 @@
 import pprint
 
+#users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
+try:
+    users = {}
+except NameError:
+    users = None
 
-users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
 
-
+# функция для отображения главного меню. Возвращает выбранный пункт меню
 def menu():
-    main_menu = '1. Просмотреть всех пользователей\n' \
+    main_menu = '\n1. Просмотреть всех пользователей\n' \
                 '2. Добавить пользователя\n' \
                 '3. Удалить пользователя\n' \
                 '4. Редактировать пользователя\n' \
                 '0. Выход'
     print(main_menu)
-    choice = int(input('Выберете пункт меню: '))
+    choice = int(input('\nВыберете пункт меню: '))
     return choice
 
 
+# функция, которая создает рекомендацию о пользователе. Принимает пользователя
 def recomendation(user):
     greeting = ''
     RECOMENDATION_BAD = 'Все очень плохо. И тут даже не до шуток. ' \
@@ -62,7 +67,7 @@ def recomendation(user):
           ' - вес', weight, '\n\n')
 
     # рекомендации-константы;)
-    if 18 < age < 26:
+    if 18 <= age < 26:
         if 0 < bmi < 16:
             if sex == 'М':
                 print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_MALE))
@@ -79,11 +84,8 @@ def recomendation(user):
         elif 35 < bmi < 39.9:
             print(RECOMENDATION_VERY_HIGHT)
         elif bmi > 40:
-            if sex == 'М':
-                print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_MALE))
-            else:
-                print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_FEMALE))
-    elif age > 26:
+            print(RECOMENDATION_EXTREMELY_HIGHT)
+    elif age >= 26:
         if 0 < bmi < 16:
             if sex == 'М':
                 print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_MALE))
@@ -100,13 +102,11 @@ def recomendation(user):
         elif 36 < bmi < 40.9:
             print(RECOMENDATION_VERY_HIGHT)
         elif bmi > 41:
-            if sex == 'М':
-                print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_MALE))
-            else:
-                print(RECOMENDATION_BAD, '{}'.format(RECOMENDATION_FOR_FEMALE))
+            print(RECOMENDATION_EXTREMELY_HIGHT)
     else:
         print('Вы еще слишком малы для таких забот\n')
 
+    # Построение псевдографика
     graph = '0' + '_' * 18 + '18' + '-' * 12 + '30' + '=' * 10 + '40'
     graph = list(graph)
     if int(bmi) > 40:
@@ -117,15 +117,19 @@ def recomendation(user):
           ''.join(graph), '\n')
 
 
+# функция для вывода на экран ключей словаря (пользователей). Принимает словарь.
 def list_users(users):
     users_list = []
     [users_list.append(key) for key in users.keys()]
     print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
 
 
+# функция добавления пользователя. Принимает словарь и в зависимости
+# от того, пустой он или нет, добавляет или обновляет информацию
+# возвращает обновленный словарь
 def add_user(users):
-    name = input('Введите Ваше имя: ')
-    age = int(input('Введите Ваш возраст: '))
+    name = input('Введите имя: ')
+    age = int(input('Введите возраст: '))
     sex = input('Пол М/Ж: ').upper()
     while True:
         if sex == 'М' or sex == 'Ж':
@@ -133,8 +137,8 @@ def add_user(users):
         else:
             print('Поле "Пол" должно содержать либо "м" либо "ж"')
             sex = input('Пол М/Ж: ').upper()
-    weight = int(input('Введите Ваш вес в кг: '))
-    height = int(input('Введите Ваш рост в см: '))
+    weight = int(input('Введите вес в кг: '))
+    height = int(input('Введите рост в см: '))
     if len(users) == 0:
         users = {
             name: {
@@ -152,6 +156,7 @@ def add_user(users):
         return users
 
 
+# функция удаления пользователя. Принимает словарь. Возвращает обновленный словарь
 def del_user(users):
     selected_users = input('\nвведите имя пользователя, которого необходимо удалить\n'
                            'или нажмите Enter для выхода в главное меню: ')
@@ -165,10 +170,16 @@ def del_user(users):
     return users
 
 
+# Функция редактирования пользователя. На вход принимает словарь
+# возвращает обновленный словарь
 def edit_user(users):
+    
+    # Вывод на экран существующий пользователей
     users_list = []
     [users_list.append(key) for key in users.keys()]
     print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
+
+    # выход в главное меню, добавление рекомендации, и обновление данных пользователя
     selected_users = input('введите имя пользователя для просмотра информации о нем: ')
     for key in users.keys():
         if key == selected_users:
@@ -186,7 +197,7 @@ def edit_user(users):
                 recomendation(selected_users)
 
             elif local_choice == 2:
-                age = int(input('Введите Ваш возраст: '))
+                age = int(input('Введите возраст: '))
                 sex = input('Пол М/Ж: ').upper()
                 while True:
                     if sex == 'М' or sex == 'Ж':
@@ -194,17 +205,16 @@ def edit_user(users):
                     else:
                         print('Поле "Пол" должно содержать либо "м" либо "ж"')
                         sex = input('Пол М/Ж: ').upper()
-                weight = int(input('Введите Ваш вес в кг: '))
-                height = int(input('Введите Ваш рост в см: '))
+                weight = int(input('Введите вес в кг: '))
+                height = int(input('Введите рост в см: '))
                 users.update({selected_users: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
                 print('\nПользователь {} успешно отредактирован\n'.format(selected_users))
 
-        continue
     return users
 
 
+# цикл для работы программы
 while True:
-
     choice = menu()
 
     if choice == 1:
