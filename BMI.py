@@ -1,6 +1,6 @@
 import pprint
 
-# users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
+users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
 
 try:
     users
@@ -182,7 +182,7 @@ def edit_user(users):
 
     # выход в главное меню, добавление рекомендации, и обновление данных пользователя
     selected_users = input('введите имя пользователя для просмотра информации о нем: ')
-    for key in users.keys():
+    for key in users_list:
         if key == selected_users:
             print()
             pprint.pprint(users.get(selected_users))
@@ -210,6 +210,8 @@ def edit_user(users):
                 height = int(input('Введите рост в см: '))
                 users.update({selected_users: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
                 print('\nПользователь {} успешно отредактирован\n'.format(selected_users))
+        else:
+            print('\nПользователя ' + str(selected_users) + ' не существует\n')
 
     return users
 
