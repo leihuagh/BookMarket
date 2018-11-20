@@ -14,7 +14,7 @@ def isnum(param):
     while True:
         value = input('Введите ' + param)
         if value.isnumeric():
-            return value
+            return int(value)
         else:
             print(param, '- числовой параметр ')
 
@@ -28,7 +28,7 @@ def menu():
                 '0. Выход'
     print(main_menu)
     choice = int(input('\nВыберете пункт меню: '))
-    return int(choice)
+    return choice
 
 
 # функция, которая создает рекомендацию о пользователе. Принимает пользователя
