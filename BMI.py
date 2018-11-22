@@ -128,7 +128,7 @@ def recomendation(user):
         graph.insert(int(bmi), 'X')
     print("\nПсевдографик:",
           ''.join(graph), '\n')
-
+ячсячсячячсячсячсфчсфывывфывфы
 
 # функция для вывода на экран ключей словаря (пользователей). Принимает словарь.
 def list_users(users):
