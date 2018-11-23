@@ -141,13 +141,13 @@ def list_users():
 def add_user():
     name = input('Введите имя: ')
     age = int(input('Введите возраст: '))
-    sex = input('Пол М/Ж: ').upper()
+    sex = input('Пол M/F: ').upper()
     while True:
         if sex == 'M' or sex == 'F':
             break
         else:
-            print('Поле "Пол" должно содержать либо "m" либо "f"')
-            sex = input('Пол М/Ж: ').upper()
+            print('Поле "Пол" должно содержать либо "M" либо "F"')
+            sex = input('Пол M/F: ').upper()
     weight = int(input('Введите вес в кг: '))
     height = int(input('Введите рост в см: '))
 
@@ -217,12 +217,12 @@ def edit_user():
 
         elif local_choice == 2:
             age = int(input('Введите возраст: '))
-            sex = input('Пол М/Ж: ').upper()
+            sex = input('Пол M/F: ').upper()
             while True:
                 if sex == 'M' or sex == 'F':
                     break
                 else:
-                    print('Поле "Пол" должно содержать либо "m" либо "f"')
+                    print('Поле "Пол" должно содержать либо "M" либо "F"')
                     sex = input('Пол М/Ж: ').upper()
             weight = int(input('Введите вес в кг: '))
             height = int(input('Введите рост в см: '))
