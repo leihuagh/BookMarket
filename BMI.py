@@ -1,22 +1,17 @@
-import pprint
-
-# users = {'Serg': {'возраст': 20, "пол": "м", "вес": 75, "рост": 160}}
-
-try:
-    users
-except NameError:
-    users = {}
+import json
 
 
-# функция проверяет введенные пользователем данные на принадлежность к "числу"
-# не успел применить ее ко всем параметрам, где нужно ввести число !!!!!!!!!!!!!!!!!!!!!!
-def isnum(param):
-    while True:
-        value = input('Введите ' + param)
-        if value.isnumeric():
-            return value
-        else:
-            print(param, '- числовой параметр ')
+# функция, которая проверяет есть ли в дирректории с файлом программы
+# текстовый файл. Если его не существует - создает его
+def is_file():
+    try:
+        print('Проверка наличия файла для корректной работы программы...')
+        with open('list.txt', 'r'):
+            print('Все хорошо, файл найден. Начнем работу)')
+            return
+    except FileNotFoundError:
+        with open('list.txt', 'w'):
+            print('Создан пустой файл "list.txt". Давайте начнем)')
 
 
 # функция для отображения главного меню. Возвращает выбранный пункт меню
@@ -31,8 +26,9 @@ def menu():
     return choice
 
 
-# функция, которая создает рекомендацию о пользователе. Принимает пользователя
-def recomendation(user):
+# функция, которая создает рекомендацию о пользователе.
+# Принимает словарь и ключ
+def recomendation(users, user):
     greeting = ''
     RECOMENDATION_BAD = 'Все очень плохо. И тут даже не до шуток. ' \
                         'Рекомендуем повышение веса и лечение анерексии. ' \
@@ -53,10 +49,10 @@ def recomendation(user):
     RECOMENDATION_FOR_FEMALE = 'Юная леди, Вам еще детей рожать'
 
     # формула для расчета ИМТ (делим рост на 100, что бы расчеты были верны)
-    weight = users[user]['вес']
-    height = users[user]['рост']
-    sex = users[user]['пол']
-    age = users[user]['возраст']
+    weight = users[user]['weight']
+    height = users[user]['height']
+    sex = users[user]['sex']
+    age = users[user]['age']
     bmi = weight / ((height / 100) ** 2)
 
     # Обращение по полу
@@ -67,17 +63,16 @@ def recomendation(user):
 
     # вывод на экран с помощью .format
     print('\n\n' + greeting.format(user), '\n'
-                                          'Ваш рост: {}'.format(height), '\n'
-                                                                         'Ваш вес: {}'.format(weight), '\n'
-                                                                                                       'Ваш BMI: {}'.format(
-        round(bmi, 2)))
+          'Ваш рост: {}'.format(height), '\n'
+          'Ваш вес: {}'.format(weight), '\n'
+          'Ваш BMI: {}'.format(round(bmi, 2)))
 
     # вывод на экран просто переменных
     print('\n====Рекомендация====\n'
           ' - пол:', sex, '\n'
-                          ' - возраст:', age, '\n'
-                                              ' - рост', height, '\n'
-                                                                 ' - вес', weight, '\n\n')
+          ' - возраст:', age, '\n'
+          ' - рост', height, '\n'
+          ' - вес', weight, '\n\n')
 
     # рекомендации-константы;)
     if 18 <= age < 26:
@@ -128,122 +123,139 @@ def recomendation(user):
         graph.insert(int(bmi), 'X')
     print("\nПсевдографик:",
           ''.join(graph), '\n')
-ячсячсячячсячсячсфчсфывывфывфы
 
-# функция для вывода на экран ключей словаря (пользователей). Принимает словарь.
-def list_users(users):
-    users_list = []
-    [users_list.append(key) for key in users.keys()]
+
+# функция для вывода на экран списка ключей словаря
+def list_users():
+    with open('list.txt', 'r') as my_file:
+        users_list = []
+        if len(my_file.readline()) != 0:
+            my_file.seek(0)
+            for line in my_file:
+                dict_contents = json.loads(line)
+                [users_list.append(key) for key in dict_contents.keys()]
     print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
 
 
-# функция добавления пользователя. Принимает словарь и в зависимости
-# от того, пустой он или нет, добавляет или обновляет информацию
-# возвращает обновленный словарь
-def add_user(users):
+# функция добавления пользователя.
+def add_user():
     name = input('Введите имя: ')
-    age = isnum('возраст ')
+    age = int(input('Введите возраст: '))
     sex = input('Пол М/Ж: ').upper()
     while True:
-        if sex == 'М' or sex == 'Ж':
+        if sex == 'M' or sex == 'F':
             break
         else:
-            print('Поле "Пол" должно содержать либо "м" либо "ж"')
+            print('Поле "Пол" должно содержать либо "m" либо "f"')
             sex = input('Пол М/Ж: ').upper()
-    weight = isnum('вес в кг ')
-    height = isnum('рост в см ')
-    if len(users) == 0:
-        users = {
-            name: {
-                'возраст': age,
-                'пол': sex,
-                'вес': weight,
-                'рост': height
-            }
-        }
-        print('\nПользователь {} успешно добавлен'.format(name))
-        return users
-    else:
-        users.update({name: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
+    weight = int(input('Введите вес в кг: '))
+    height = int(input('Введите рост в см: '))
+
+    # в каждую строчку файла добавляется словарь
+    with open('list.txt', 'a+') as my_file:
+        dict_contents = {name: {'age': age, 'sex': sex, 'weight': weight, 'height': height}}
+        my_file.write(json.dumps(dict_contents))
+        my_file.write('\n')
         print('\nПользователь {} успешно добавлен\n'.format(name))
-        return users
 
 
-# функция удаления пользователя. Принимает словарь. Возвращает обновленный словарь
-def del_user(users):
+# функция удаления пользователя
+def del_user():
     selected_users = input('\nвведите имя пользователя, которого необходимо удалить\n'
                            'или нажмите Enter для выхода в главное меню: ')
-    if selected_users == '':
-        return
-    try:
-        del users[selected_users]
-        print('\nПользователь ' + str(selected_users) + ' успешно удален\n')
-    except KeyError:
-        print('\nПользователя ' + str(selected_users) + ' не существует\n')
-    return users
+
+    # создается пустой словарь. Заполняется значениями из файла. После чего удаляем ззначение инпута
+    dict = {}
+    with open('list.txt', 'r') as my_file:
+        for line in my_file:
+            dict_contents = json.loads(line)
+            dict.update(dict_contents)
+        try:
+            del dict[selected_users]
+            print('\nПользователь ' + str(selected_users) + ' успешно удален\n')
+        except KeyError:
+            print('\nПользователя ' + str(selected_users) + ' не существует\n')
+
+    # открываем файл на запись (он пустой, соответственно).
+    # Построчно заполняется оставшимся после удаления, словарем
+    with open('list.txt', 'w') as my_file:
+        for key, value in dict.items():
+            my_file.write(json.dumps({key: value}))
+            my_file.write('\n')
 
 
-# Функция редактирования пользователя. На вход принимает словарь
-# возвращает обновленный словарь
-def edit_user(users):
-    # Вывод на экран существующий пользователей
-    users_list = []
-    [users_list.append(key) for key in users.keys()]
+# Функция редактирования пользователя
+def edit_user():
+
+    # создается список ключей из каждой строчки файла (словарей)
+    with open('list.txt', 'r') as my_file:
+        users_list = []
+        my_file.seek(0)
+        for line in my_file:
+            dict_contents = json.loads(line)
+            [users_list.append(key) for key in dict_contents.keys()]
     print('\n--Пользователи--\n' + ', '.join(users_list) + '\n')
+    selected_users = input('введите имя пользователя для просмотра информации о нем: ')
 
-    if len(users_list) != 0:
-        # выход в главное меню, добавление рекомендации, и обновление данных пользователя
-        selected_users = input('введите имя пользователя для просмотра информации о нем: ')
-        for name in users_list:
-            if name == selected_users:
-                print()
-                pprint.pprint(users.get(selected_users))
-                print('\n1. Расчитать BMI пользователя'
-                      '\n2. Обновить информацию о пользователе\n'
-                      '0. Выход в главное меню\n')
-                local_choice = int(input())
+    # создается пустой словарь. Заполняется значениями из файла
+    dict = {}
+    with open('list.txt', 'r') as my_file:
+        for line in my_file:
+            dict_contents = json.loads(line)
+            dict.update(dict_contents)
+    if selected_users in dict.keys():
+        print('\n1. Расчитать BMI пользователя'
+              '\n2. Обновить информацию о пользователе\n'
+              '0. Выход в главное меню\n')
+        local_choice = int(input())
 
-                if local_choice == 0:
+        if local_choice == 0:
+            return
+
+        elif local_choice == 1:
+            recomendation(dict, selected_users)
+
+        elif local_choice == 2:
+            age = int(input('Введите возраст: '))
+            sex = input('Пол М/Ж: ').upper()
+            while True:
+                if sex == 'M' or sex == 'F':
                     break
-
-                elif local_choice == 1:
-                    recomendation(selected_users)
-
-                elif local_choice == 2:
-                    age = int(input('Введите возраст: '))
+                else:
+                    print('Поле "Пол" должно содержать либо "m" либо "f"')
                     sex = input('Пол М/Ж: ').upper()
-                    while True:
-                        if sex == 'М' or sex == 'Ж':
-                            break
-                        else:
-                            print('Поле "Пол" должно содержать либо "м" либо "ж"')
-                            sex = input('Пол М/Ж: ').upper()
-                    weight = int(input('Введите вес в кг: '))
-                    height = int(input('Введите рост в см: '))
-                    users.update({selected_users: {'возраст': age, 'пол': sex, 'вес': weight, 'рост': height}})
-                    print('\nПользователь {} успешно отредактирован\n'.format(selected_users))
-            else:
-                print('\nПользователя ' + str(selected_users) + ' не существует\n')
+            weight = int(input('Введите вес в кг: '))
+            height = int(input('Введите рост в см: '))
+
+            # обновляет словарь. После чего проходим циклом по словарю и построчно записываем в файл
+            dict.update({selected_users: {'age': age, 'sex': sex, 'weight': weight, 'height': height}})
+            with open('list.txt', 'w') as my_file:
+                for key, value in dict.items():
+                    my_file.write(json.dumps({key: value}))
+                    my_file.write('\n')
     else:
-        print('в базе нет ни одного пользователя')
-        return users
+        print('\nПользователя ' + str(selected_users) + ' не существует\n')
+        return
 
 
-# цикл для работы программы
+# Работа программы
+is_file()
+
 while True:
+
     choice = menu()
 
     if choice == 1:
-        list_users(users)
+        list_users()
 
     if choice == 2:
-        users = add_user(users)
+        add_user()
 
     if choice == 3:
-        users = del_user(users)
+        del_user()
 
     if choice == 4:
-        users = edit_user(users)
+        edit_user()
 
     if choice == 0:
         break
