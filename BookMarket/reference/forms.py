@@ -2,7 +2,7 @@ from django import forms
 from reference.models import Author, Genre, Series, Publisher, Manufacturer
 
 
-class AuthorRefCreateForm(forms.ModelForm):
+class AuthorRefForm(forms.ModelForm):
     class Meta:
         model = Author
 
@@ -12,7 +12,7 @@ class AuthorRefCreateForm(forms.ModelForm):
         ]
 
 
-class GenreRefCreateForm(forms.ModelForm):
+class GenreRefForm(forms.ModelForm):
     class Meta:
         model = Genre
 
@@ -22,7 +22,7 @@ class GenreRefCreateForm(forms.ModelForm):
         ]
 
 
-class SeriesRefCreateForm(forms.ModelForm):
+class SeriesRefForm(forms.ModelForm):
     class Meta:
         model = Series
 
@@ -32,7 +32,7 @@ class SeriesRefCreateForm(forms.ModelForm):
         ]
 
 
-class PublisherRefCreateForm(forms.ModelForm):
+class PublisherRefForm(forms.ModelForm):
     class Meta:
         model = Publisher
 
@@ -42,7 +42,7 @@ class PublisherRefCreateForm(forms.ModelForm):
         ]
 
 
-class ManufacturerRefCreateForm(forms.ModelForm):
+class ManufacturerRefForm(forms.ModelForm):
     class Meta:
         model = Manufacturer
 
