@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Представление для {{ ref_action }}</h1>
+{{ temp }}<p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        Значение <p>
+    <b>{{ object.name }}<p></b>
+    Описание <p>
+    <b>{{ object.description }}<p></b>
+        <button type="submit">удалить</button>
+    </form>
+</body>
+</html>

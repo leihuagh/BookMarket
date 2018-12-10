@@ -21,7 +21,7 @@ from admincore.views import CoreAdminTemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shopadmin/core/', CoreAdminTemplateView.as_view()),
+    path('admin-shop/core/', CoreAdminTemplateView.as_view()),
     path('', UserHomeTemplateView.as_view()),
-    path('shopadmin/', include('reference.urls'))
+    path('admin-shop/', include('reference.urls'))
 ]

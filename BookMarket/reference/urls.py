@@ -19,21 +19,39 @@ from django.urls import path
 
 from reference.views import AuthorRefCreateView, GenreRefCreateView, SeriesRefCreateView, \
     PublisherRefCreateView, ManufacturerRefCreateView, AuthorRefUpdateView, GenreRefUpdateView, \
-    SeriesRefUpdateView, PublisherRefUpdateView, ManufactorerRefUpdateView, DetailAuthorRefView, DetailGenreRefView, ListAuthorRefView
+    SeriesRefUpdateView, PublisherRefUpdateView, ManufactorerRefUpdateView, AuthorRefDetailView, GenreRefDetailView, \
+    AuthorRefListView, AuthorRefDeleteView, GenreRefListView, GenreRefDeleteView, SeriesRefListView, \
+    SeriesRefDetailView, SeriesRefDeleteView, PublisherRefListView, PublisherRefDetailView, PublisherRefDeleteView, \
+    ManufacturerRefListView, ManufacturerRefDetailView, ManufactorerRefDeleteView
 
 urlpatterns = [
-    path('admin-shop/ref/author-ref-create/', AuthorRefCreateView.as_view()),
-    path('admin-shop/ref/genre-ref-create/', GenreRefCreateView.as_view()),
-    path('admin-shop/ref/series-ref-create/', SeriesRefCreateView.as_view()),
-    path('admin-shop/ref/publisher-ref-create/', PublisherRefCreateView.as_view()),
-    path('admin-shop/ref/manufacturer-ref-create/', ManufacturerRefCreateView.as_view()),
-    path('admin-shop/ref/author-ref-update/<int:pk>/', AuthorRefUpdateView.as_view()),
-    path('admin-shop/ref/genre-ref-update/<int:pk>/', GenreRefUpdateView.as_view()),
-    path('admin-shop/ref/series-ref-update/<int:pk>/', SeriesRefUpdateView.as_view()),
-    path('admin-shop/ref/publisher-ref-update/<int:pk>/', PublisherRefUpdateView.as_view()),
-    path('admin-shop/ref/manufactorer-ref-update/<int:pk>/', ManufactorerRefUpdateView.as_view()),
-    path('admin-shop/ref/author-ref-detail/<int:pk>/', DetailAuthorRefView.as_view()),
-    path('admin-shop/ref/genre-ref-detail/<int:pk>/', DetailGenreRefView.as_view()),
+    path('ref/author-ref-create/', AuthorRefCreateView.as_view()),
+    path('ref/author-ref-update/<int:pk>/', AuthorRefUpdateView.as_view()),
+    path('ref/author-ref-detail/<int:pk>/', AuthorRefDetailView.as_view()),
+    path('ref/author-ref-list/', AuthorRefListView.as_view()),
+    path('ref/author-ref-delete/<int:pk>/', AuthorRefDeleteView.as_view()),
 
-    path('admin-shop/ref/author-ref-list/', ListAuthorRefView.as_view())
+    path('ref/genre-ref-create/', GenreRefCreateView.as_view()),
+    path('ref/genre-ref-update/<int:pk>/', GenreRefUpdateView.as_view()),
+    path('ref/genre-ref-detail/<int:pk>/', GenreRefDetailView.as_view()),
+    path('ref/genre-ref-list/', GenreRefListView.as_view()),
+    path('ref/genre-ref-delete/<int:pk>/', GenreRefDeleteView.as_view()),
+
+    path('ref/series-ref-create/', SeriesRefCreateView.as_view()),
+    path('ref/series-ref-update/<int:pk>/', SeriesRefUpdateView.as_view()),
+    path('ref/series-ref-list/', SeriesRefListView.as_view()),
+    path('ref/series-ref-detail/<int:pk>/', SeriesRefDetailView.as_view()),
+    path('ref/series-ref-delete/<int:pk>/', SeriesRefDeleteView.as_view()),
+
+    path('ref/publisher-ref-create/', PublisherRefCreateView.as_view()),
+    path('ref/publisher-ref-update/<int:pk>/', PublisherRefUpdateView.as_view()),
+    path('ref/publisher-ref-list/', PublisherRefListView.as_view()),
+    path('ref/publisher-ref-detail/<int:pk>/', PublisherRefDetailView.as_view()),
+    path('ref/publisher-ref-delete/<int:pk>/', PublisherRefDeleteView.as_view()),
+
+    path('ref/manufacturer-ref-create/', ManufacturerRefCreateView.as_view()),
+    path('ref/manufacturer-ref-update/<int:pk>/', ManufactorerRefUpdateView.as_view()),
+    path('ref/manufacturer-ref-list/', ManufacturerRefListView.as_view()),
+    path('ref/manufacturer-ref-detail/<int:pk>/', ManufacturerRefDetailView.as_view()),
+    path('ref/manufacturer-ref-delete/<int:pk>/', ManufactorerRefDeleteView.as_view()),
 ]
