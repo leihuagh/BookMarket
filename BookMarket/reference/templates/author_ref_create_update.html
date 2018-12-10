@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1>{{ test }}</h1>
+<h1>Представления для {{ ref_action }}</h1>
+{{ temp }}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}

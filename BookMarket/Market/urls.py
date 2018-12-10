@@ -14,22 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from core.views import UserHomeTemplateView
+from admincore.views import CoreAdminTemplateView
 
-from reference.views import AuthorRefCreateView, GenreRefCreateView, SeriesRefCreateView, \
-    PublisherRefCreateView, ManufacturerRefCreateView, AuthorRefUpdateView, GenreRefUpdateView, \
-    SeriesRefUpdateView, PublisherRefUpdateView, ManufactorerRefUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin-shop/ref/author-ref-create/', AuthorRefCreateView.as_view()),
-    path('admin-shop/ref/genre-ref-create/', GenreRefCreateView.as_view()),
-    path('admin-shop/ref/series-ref-create/', SeriesRefCreateView.as_view()),
-    path('admin-shop/ref/publisher-ref-create/', PublisherRefCreateView.as_view()),
-    path('admin-shop/ref/manufacturer-ref-create/', ManufacturerRefCreateView.as_view()),
-    path('admin-shop/ref/author-ref-update/<int:pk>/', AuthorRefUpdateView.as_view()),
-    path('admin-shop/ref/genre-ref-update/<int:pk>/', GenreRefUpdateView.as_view()),
-    path('admin-shop/ref/series-ref-update/<int:pk>/', SeriesRefUpdateView.as_view()),
-    path('admin-shop/ref/publisher-ref-update/<int:pk>/', PublisherRefUpdateView.as_view()),
-    path('admin-shop/ref/manufactorer-ref-update/<int:pk>/', ManufactorerRefUpdateView.as_view())
+    path('shopadmin/core/', CoreAdminTemplateView.as_view()),
+    path('', UserHomeTemplateView.as_view()),
+    path('shopadmin/', include('reference.urls'))
 ]

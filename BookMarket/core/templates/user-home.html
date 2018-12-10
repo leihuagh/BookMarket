@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>магазин книг</title>
+</head>
+<body>
+<h1>Главная страница магазина</h1>
+<h2></h2>
+<ul>
+    {% if user.is_superuser %}
+        <li><a href="/shopadmin/core/">Административный портал</a> </li>
+    {% endif %}
+</ul>
+{% if user.is_authenticated %}
+    {{ user.username }}
+{% endif %}
+</body>
+</html>

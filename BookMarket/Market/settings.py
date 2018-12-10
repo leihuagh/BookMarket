@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # my
     'reference',
     'products',
+    'core',
+    'admincore'
 ]
 
 MIDDLEWARE = [

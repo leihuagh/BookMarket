@@ -20,6 +20,12 @@ class Author(models.Model):
         blank=True,
     )
 
+    def get_update_url(self):
+        return '/shopadmin/admin-shop/ref/author-ref-update/{}/'.format(self.pk)
+
+    def get_view_url(self):
+        return '/shopadmin/admin-shop/ref/author-ref-detail/{}/'.format(self.pk)
+
     def __str__(self):
         return self.name
 
