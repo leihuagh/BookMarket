@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="{% url 'AdminShopCore' %}">Назад в административный портал</a><p>
+    <h1>{{ descr }}</h1>
+    {% for object in object_list %}
+        {{ object.name }} {{ object.description }}<p>
+        <a href="{{ object.get_view_url }} ">Просмотреть</a><p>
+        <a href="{{ object.get_update_url }} ">Обновить</a><p>
+        <a href="{{ object.get_delete_url }} ">Удалить</a><p>
+    {% endfor %}
+</body>
+</html>

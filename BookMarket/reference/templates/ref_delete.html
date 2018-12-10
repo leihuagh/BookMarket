@@ -7,14 +7,15 @@
 <body>
 <h1>Представление для {{ ref_action }}</h1>
 {{ temp }}<p>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        Значение <p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    Значение <p>
     <b>{{ object.name }}<p></b>
     Описание <p>
     <b>{{ object.description }}<p></b>
-        <button type="submit">удалить</button>
-    </form>
+    <button type="submit">удалить</button>
+    <button type="button" onclick="history.go(-1);">Назад</button>
+</form>
 </body>
 </html>

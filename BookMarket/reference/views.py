@@ -10,7 +10,7 @@ from .models import Author, Genre, Series, Publisher, Manufacturer
 
 # Просмотр, подробно, создание обновление и удаление АВТОРА
 class AuthorRefListView(ListView):
-    template_name = "list-base-ref.html"
+    template_name = "ref-list-base.html"
     model = Author
 
     def get_context_data(self, *args, **kwargs):
@@ -20,7 +20,7 @@ class AuthorRefListView(ListView):
 
 
 class AuthorRefDetailView(DeleteView):
-    template_name = 'view-base-ref.html'
+    template_name = 'ref-view-base.html'
     model = Author
 
     def get_context_data(self, *args, **kwargs):
@@ -68,7 +68,7 @@ class AuthorRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление ЖАНРА ============================================
 class GenreRefListView(ListView):
-    template_name = "list-base-ref.html"
+    template_name = "ref-list-base.html"
     model = Genre
 
     def get_context_data(self, *args, **kwargs):
@@ -89,7 +89,7 @@ class GenreRefCreateView(CreateView):
 
 
 class GenreRefDetailView(DeleteView):
-    template_name = 'view-base-ref.html'
+    template_name = 'ref-view-base.html'
     model = Genre
 
     def get_context_data(self, *args, **kwargs):
@@ -126,7 +126,7 @@ class GenreRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление СЕРИИ======================================
 class SeriesRefListView(ListView):
-    template_name = "list-base-ref.html"
+    template_name = "ref-list-base.html"
     model = Series
 
     def get_context_data(self, *args, **kwargs):
@@ -159,7 +159,7 @@ class SeriesRefUpdateView(UpdateView):
 
 
 class SeriesRefDetailView(DeleteView):
-    template_name = 'view-base-ref.html'
+    template_name = 'ref-view-base.html'
     model = Series
 
     def get_context_data(self, *args, **kwargs):
@@ -183,7 +183,7 @@ class SeriesRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление ИЗДАТЕЛЬСТВА======================================
 class PublisherRefListView(ListView):
-    template_name = "list-base-ref.html"
+    template_name = "ref-list-base.html"
     model = Publisher
 
     def get_context_data(self, *args, **kwargs):
@@ -193,7 +193,7 @@ class PublisherRefListView(ListView):
 
 
 class PublisherRefDetailView(DeleteView):
-    template_name = 'view-base-ref.html'
+    template_name = 'ref-view-base.html'
     model = Publisher
 
     def get_context_data(self, *args, **kwargs):
@@ -242,7 +242,7 @@ class PublisherRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление ИЗГАТОВИТЕЛЯ======================================
 class ManufacturerRefListView(ListView):
-    template_name = "list-base-ref.html"
+    template_name = "ref-list-base.html"
     model = Manufacturer
 
     def get_context_data(self, *args, **kwargs):
@@ -263,7 +263,7 @@ class ManufacturerRefCreateView(CreateView):
 
 
 class ManufacturerRefDetailView(DeleteView):
-    template_name = 'view-base-ref.html'
+    template_name = 'ref-view-base.html'
     model = Manufacturer
 
     def get_context_data(self, *args, **kwargs):

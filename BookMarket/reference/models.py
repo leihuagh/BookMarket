@@ -26,6 +26,9 @@ class Author(models.Model):
     def get_view_url(self):
         return '/admin-shop/ref/author-ref-detail/{}/'.format(self.pk)
 
+    def get_delete_url(self):
+        return '/admin-shop/ref/author-ref-delete/{}/'.format(self.pk)
+
     def __str__(self):
         return self.name
 
@@ -50,6 +53,9 @@ class Genre(models.Model):
 
     def get_view_url(self):
         return '/admin-shop/ref/genre-ref-detail/{}/'.format(self.pk)
+
+    def get_delete_url(self):
+        return '/admin-shop/ref/genre-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
@@ -76,6 +82,9 @@ class Series(models.Model):
     def get_view_url(self):
         return '/admin-shop/ref/series-ref-detail/{}/'.format(self.pk)
 
+    def get_delete_url(self):
+        return '/admin-shop/ref/series-ref-delete/{}/'.format(self.pk)
+
     def __str__(self):
         return self.name
 
@@ -101,6 +110,9 @@ class Publisher(models.Model):
     def get_view_url(self):
         return '/admin-shop/ref/publisher-ref-detail/{}/'.format(self.pk)
 
+    def get_delete_url(self):
+        return '/admin-shop/ref/publisher-ref-delete/{}/'.format(self.pk)
+
     def __str__(self):
         return self.name
 
@@ -125,6 +137,9 @@ class Manufacturer(models.Model):
 
     def get_view_url(self):
         return '/admin-shop/ref/manufacturer-ref-detail/{}/'.format(self.pk)
+
+    def get_delete_url(self):
+        return '/admin-shop/ref/manufacturer-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
