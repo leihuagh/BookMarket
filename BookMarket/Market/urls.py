@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin-shop/core/', CoreAdminTemplateView.as_view(), name='AdminShopCore'),
     path('admin-shop/', include('reference.urls')),
-    path('', UserHomeTemplateView.as_view()),
+    path('', UserHomeTemplateView.as_view(), name='Core'),
 ]

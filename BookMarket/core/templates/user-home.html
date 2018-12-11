@@ -9,11 +9,16 @@
 <h2></h2>
 <ul>
     {% if user.is_superuser %}
-        <li><a href="/shopadmin/core/">Административный портал</a> </li>
+        <li><a href="{% url 'AdminShopCore' %}">Административный портал</a> </li>
     {% endif %}
 </ul>
 {% if user.is_authenticated %}
     {{ user.username }}
 {% endif %}
+<a href="{% url 'AuthorRefeList' %}">Список авторов</a><p>
+<a href="{% url 'GenreRefList' %}">Список жанров</a><p>
+<a href="{% url 'SeriesRefList' %}">Список серий</a><p>
+<a href="{% url 'PublisherRefList' %}">Список издательств</a><p>
+<a href="{% url 'ManufacturerRefList' %}">Список изгатовителей</a><p>
 </body>
 </html>

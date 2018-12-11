@@ -29,6 +29,9 @@ class Author(models.Model):
     def get_delete_url(self):
         return '/admin-shop/ref/author-ref-delete/{}/'.format(self.pk)
 
+    def get_list_url(self):
+        return '/admin-shop/ref/author-ref-list/'
+
     def __str__(self):
         return self.name
 
