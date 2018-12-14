@@ -21,7 +21,7 @@
         {% if descr == 'Авторы'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:author-ref-detail' object.pk %}" class="badge badge-info">Просмотреть</a></td>
+            <td><a href="{% url 'reference:author-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
             <td><a href="{% url 'reference:author-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
             <td><a href="{% url 'reference:author-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
         {% endif %}
@@ -29,7 +29,7 @@
         {% if descr == 'Жанры'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:genre-ref-detail' object.pk %}" class="badge badge-info">Просмотреть</a></td>
+            <td><a href="{% url 'reference:genre-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
             <td><a href="{% url 'reference:genre-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
             <td><a href="{% url 'reference:genre-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
         {% endif %}
@@ -37,7 +37,7 @@
         {% if descr == 'Серии'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:series-ref-detail' object.pk %}" class="badge badge-info">Просмотреть</a></td>
+            <td><a href="{% url 'reference:series-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
             <td><a href="{% url 'reference:series-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
             <td><a href="{% url 'reference:series-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
         {% endif %}
@@ -45,7 +45,7 @@
          {% if descr == 'Издательства'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:publisher-ref-detail' object.pk %}" class="badge badge-info">Просмотреть</a></td>
+            <td><a href="{% url 'reference:publisher-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
             <td><a href="{% url 'reference:publisher-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
             <td><a href="{% url 'reference:publisher-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
         {% endif %}
@@ -53,7 +53,7 @@
          {% if descr == 'Изгатовители'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:manufacturer-ref-detail' object.pk %}" class="badge badge-info">Просмотреть</a></td>
+            <td><a href="{% url 'reference:manufacturer-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
             <td><a href="{% url 'reference:manufacturer-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
             <td><a href="{% url 'reference:manufacturer-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
         {% endif %}

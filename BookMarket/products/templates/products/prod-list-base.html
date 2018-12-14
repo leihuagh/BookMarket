@@ -20,7 +20,7 @@
         <tr>
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'products:book-prod-view' object.pk%}" class="badge badge-info">Просмотреть</a></td>
+            <td><a href="{% url 'products:book-prod-view' object.pk%}" class="badge badge-primary">Просмотреть</a></td>
             <td><a href="{% url 'products:book-prod-update' object.pk%}" class="badge badge-primary">Обновить</a></td>
             <td><a href="{% url 'products:book-prod-delete' object.pk%}" class="badge badge-danger">Удалить</a></td>
         </tr>

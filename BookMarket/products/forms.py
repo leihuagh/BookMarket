@@ -6,12 +6,6 @@ import re
 
 class ProductsForm(forms.ModelForm):
 
-    name = forms.CharField(
-        label='Название',
-        max_length=50
-    )
-
-
     class Meta:
         model = Book
 
@@ -41,6 +35,9 @@ class ProductsForm(forms.ModelForm):
     def clean_isbn(self):
         isbn = self.cleaned_data.get('isbn')
         if not re.match(r'(\d{3})-(\d{1})-(\d{2,7})-(\d{1,6})-(\d{1})', isbn):
-            raise ValidationError('format error xxx-x-xx-x-x')
+            raise ValidationError('Введите ISBN в формате xxx-x-xx-x-x')
         return isbn
+
+
+
 
