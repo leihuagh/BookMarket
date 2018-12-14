@@ -15,7 +15,7 @@
     <a href="{% url 'AdminShopCore' %}" class="badge badge-primary">Назад в административный портал</a><p>
     <h1>{{ descr }}</h1>
     <a href=" {{ get_create_url }} " class="badge badge-primary">Добавить</a><p>
-    <table>
+    <table class="table table-striped">
     {% for object in object_list %}
         <tr>
             <td>{{ object.name }}</td>
