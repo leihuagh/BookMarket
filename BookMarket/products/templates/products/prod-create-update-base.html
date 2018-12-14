@@ -16,9 +16,12 @@
 {{ temp }}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% load bootstrap %}
+    {{ form|bootstrap_horizontal:'col-lg-8' }}
+    <div style="padding-left: 2%">
     <button type="submit" class="btn btn-primary btn-sm">отправить</button>
     <button type="button" class="btn btn-secondary btn-sm"  onclick="history.go(-1);">Назад</button>
+    </div>
 </form>
 </body>
 </html>

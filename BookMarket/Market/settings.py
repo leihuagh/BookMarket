@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'reference',
     'products',
     'core',
-    'admincore'
+    'admincore',
+    'bootstrapform'
 ]
 
 MIDDLEWARE = [
