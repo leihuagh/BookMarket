@@ -1,7 +1,13 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from reference.models import Author, Series, Genre, Publisher, Manufacturer
 
 # Create your models here.
+
+
+def my_validator(val):
+    if val != 5:
+        raise ValidationError('Price must be 5')
 
 
 class Book(models.Model):
@@ -16,7 +22,8 @@ class Book(models.Model):
     )
     cover_image = models.ImageField(
         verbose_name='обложка',
-        default=None
+        default=None,
+        blank=True
     )
 
     price = models.DecimalField(
@@ -45,7 +52,9 @@ class Book(models.Model):
 
     date_of_published = models.DateField(
         verbose_name='год издания',
-        default=None
+        default=None,
+        blank=True,
+        null=True
     )
 
     numbers_of_pages = models.PositiveIntegerField(
@@ -65,7 +74,8 @@ class Book(models.Model):
         default=None
     )
 
-    isbn = models.IntegerField(
+    isbn = models.CharField(
+        max_length=50,
         verbose_name='ISBN',
         default=None
     )
@@ -110,13 +120,23 @@ class Book(models.Model):
         default=None
     )
 
-    created = models.DateTimeField(
+    created = models.DateField(
         verbose_name='дата внесения в каталог',
-        default=None
+        default=None,
+        blank=True,
+        null=True
     )
 
-    updated = models.DateTimeField(
+    updated = models.DateField(
         verbose_name='дата последнего изменения карточки',
-        default=None
+        default=None,
+        blank=True,
+        null=True
     )
+
+    def get_view_url(self):
+        return '/admin-shop/products/book-prod-view/{}/'.format(self.pk)
+
+    def __str__(self):
+        return self.name
 

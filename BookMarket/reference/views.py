@@ -6,21 +6,23 @@ from .forms import AuthorRefForm, GenreRefForm, SeriesRefForm, PublisherRefForm,
     ManufacturerRefForm
 
 from .models import Author, Genre, Series, Publisher, Manufacturer
+from django.urls import reverse, reverse_lazy
 
 
 # Просмотр, подробно, создание обновление и удаление АВТОРА
 class AuthorRefListView(ListView):
-    template_name = "ref-list-base.html"
+    template_name = "reference/ref-list-base.html"
     model = Author
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'Авторы'
+        context['get_create_url'] = reverse_lazy('reference:author-ref-create')
         return context
 
 
 class AuthorRefDetailView(DeleteView):
-    template_name = 'ref-view-base.html'
+    template_name = 'reference/ref-view-base.html'
     model = Author
 
     def get_context_data(self, *args, **kwargs):
@@ -31,8 +33,9 @@ class AuthorRefDetailView(DeleteView):
 
 class AuthorRefCreateView(CreateView):
     form_class = AuthorRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/author-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:author-ref-list')
+
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefCreateView, self).get_context_data(*args, **kwargs)
@@ -42,8 +45,8 @@ class AuthorRefCreateView(CreateView):
 
 class AuthorRefUpdateView(UpdateView):
     form_class = AuthorRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/author-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:author-ref-list')
     model = Author
 
     def get_context_data(self, *args, **kwargs):
@@ -55,8 +58,8 @@ class AuthorRefUpdateView(UpdateView):
 
 class AuthorRefDeleteView(DeleteView):
     form_class = AuthorRefForm
-    template_name = 'ref_delete.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/author-ref-list/'
+    template_name = 'reference/ref-delete-base.html'
+    success_url = reverse_lazy('reference:author-ref-list')
     model = Author
 
     def get_context_data(self, *args, **kwargs):
@@ -68,19 +71,20 @@ class AuthorRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление ЖАНРА ============================================
 class GenreRefListView(ListView):
-    template_name = "ref-list-base.html"
+    template_name = "reference/ref-list-base.html"
     model = Genre
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'Жанры'
+        context['get_create_url'] = reverse_lazy('reference:genre-ref-create')
         return context
 
 
 class GenreRefCreateView(CreateView):
     form_class = GenreRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/genre-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:genre-ref-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefCreateView, self).get_context_data(*args, **kwargs)
@@ -89,7 +93,7 @@ class GenreRefCreateView(CreateView):
 
 
 class GenreRefDetailView(DeleteView):
-    template_name = 'ref-view-base.html'
+    template_name = 'reference/ref-view-base.html'
     model = Genre
 
     def get_context_data(self, *args, **kwargs):
@@ -100,8 +104,8 @@ class GenreRefDetailView(DeleteView):
 
 class GenreRefUpdateView(UpdateView):
     form_class = GenreRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/genre-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:genre-ref-list')
     model = Genre
 
     def get_context_data(self, *args, **kwargs):
@@ -113,8 +117,8 @@ class GenreRefUpdateView(UpdateView):
 
 class GenreRefDeleteView(DeleteView):
     form_class = GenreRefForm
-    template_name = 'ref_delete.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/genre-ref-list/'
+    template_name = 'reference/ref-delete-base.html'
+    success_url = reverse_lazy('reference:genre-ref-list')
     model = Genre
 
     def get_context_data(self, *args, **kwargs):
@@ -126,19 +130,20 @@ class GenreRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление СЕРИИ======================================
 class SeriesRefListView(ListView):
-    template_name = "ref-list-base.html"
+    template_name = "reference/ref-list-base.html"
     model = Series
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'Серии'
+        context['get_create_url'] = reverse_lazy('reference:series-ref-create')
         return context
 
 
 class SeriesRefCreateView(CreateView):
     form_class = SeriesRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/series-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:series-ref-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefCreateView, self).get_context_data(*args, **kwargs)
@@ -148,8 +153,8 @@ class SeriesRefCreateView(CreateView):
 
 class SeriesRefUpdateView(UpdateView):
     form_class = SeriesRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/series-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:series-ref-list')
     model = Series
 
     def get_context_data(self, *args, **kwargs):
@@ -159,7 +164,7 @@ class SeriesRefUpdateView(UpdateView):
 
 
 class SeriesRefDetailView(DeleteView):
-    template_name = 'ref-view-base.html'
+    template_name = 'reference/ref-view-base.html'
     model = Series
 
     def get_context_data(self, *args, **kwargs):
@@ -170,8 +175,8 @@ class SeriesRefDetailView(DeleteView):
 
 class SeriesRefDeleteView(DeleteView):
     form_class = SeriesRefForm
-    template_name = 'ref_delete.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/series-ref-list/'
+    template_name = 'reference/ref-delete-base.html'
+    success_url = reverse_lazy('reference:series-ref-list')
     model = Series
 
     def get_context_data(self, *args, **kwargs):
@@ -183,17 +188,18 @@ class SeriesRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление ИЗДАТЕЛЬСТВА======================================
 class PublisherRefListView(ListView):
-    template_name = "ref-list-base.html"
+    template_name = "reference/ref-list-base.html"
     model = Publisher
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'Издательства'
+        context['get_create_url'] = reverse_lazy('reference:publisher-ref-create')
         return context
 
 
 class PublisherRefDetailView(DeleteView):
-    template_name = 'ref-view-base.html'
+    template_name = 'reference/ref-view-base.html'
     model = Publisher
 
     def get_context_data(self, *args, **kwargs):
@@ -204,8 +210,8 @@ class PublisherRefDetailView(DeleteView):
 
 class PublisherRefCreateView(CreateView):
     form_class = PublisherRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/publisher-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:publisher-ref-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefCreateView, self).get_context_data(*args, **kwargs)
@@ -216,8 +222,8 @@ class PublisherRefCreateView(CreateView):
 
 class PublisherRefUpdateView(UpdateView):
     form_class = PublisherRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/publisher-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:publisher-ref-list')
     model = Publisher
 
     def get_context_data(self, *args, **kwargs):
@@ -229,8 +235,8 @@ class PublisherRefUpdateView(UpdateView):
 
 class PublisherRefDeleteView(DeleteView):
     form_class = PublisherRefForm
-    template_name = 'ref_delete.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/publisher-ref-list/'
+    template_name = 'reference/ref-delete-base.html'
+    success_url = reverse_lazy('reference:publisher-ref-list')
     model = Publisher
 
     def get_context_data(self, *args, **kwargs):
@@ -242,19 +248,20 @@ class PublisherRefDeleteView(DeleteView):
 
 # Просмотр, подробно, создание обновление и удаление ИЗГАТОВИТЕЛЯ======================================
 class ManufacturerRefListView(ListView):
-    template_name = "ref-list-base.html"
+    template_name = "reference/ref-list-base.html"
     model = Manufacturer
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'Изгатовители'
+        context['get_create_url'] = reverse_lazy('reference:manufacturer-ref-create')
         return context
 
 
 class ManufacturerRefCreateView(CreateView):
     form_class = ManufacturerRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/manufacturer-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:manufacturer-ref-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefCreateView, self).get_context_data(*args, **kwargs)
@@ -263,7 +270,7 @@ class ManufacturerRefCreateView(CreateView):
 
 
 class ManufacturerRefDetailView(DeleteView):
-    template_name = 'ref-view-base.html'
+    template_name = 'reference/ref-view-base.html'
     model = Manufacturer
 
     def get_context_data(self, *args, **kwargs):
@@ -274,8 +281,8 @@ class ManufacturerRefDetailView(DeleteView):
 
 class ManufactorerRefUpdateView(UpdateView):
     form_class = ManufacturerRefForm
-    template_name = 'ref_create_update.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/manufacturer-ref-list/'
+    template_name = 'reference/ref-create-update-base.html'
+    success_url = reverse_lazy('reference:manufacturer-ref-list')
     model = Manufacturer
 
     def get_context_data(self, *args, **kwargs):
@@ -286,8 +293,8 @@ class ManufactorerRefUpdateView(UpdateView):
 
 class ManufactorerRefDeleteView(DeleteView):
     form_class = ManufacturerRefForm
-    template_name = 'ref_delete.html'
-    success_url = 'http://127.0.0.1:8000/admin-shop/ref/manufacturer-ref-list/'
+    template_name = 'reference/ref-delete-base.html'
+    success_url = reverse_lazy('reference:manufacturer-ref-list')
     model = Manufacturer
 
     def get_context_data(self, *args, **kwargs):
