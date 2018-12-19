@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'products',
     'core',
     'admincore',
-    'bootstrapform'
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ STATIC_URL = '/static/'
 #collect static
 #STATIC_ROOT
 #MEDIA_ROOT
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SITE_NAME = 'Best book store'

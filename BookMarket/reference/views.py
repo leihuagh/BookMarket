@@ -40,6 +40,7 @@ class AuthorRefCreateView(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefCreateView, self).get_context_data(*args, **kwargs)
         context['ref_action'] = 'создания нового автора'
+        context['action'] = 'Создание'
         return context
 
 
@@ -52,6 +53,7 @@ class AuthorRefUpdateView(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefUpdateView, self).get_context_data(*args, **kwargs)
         context['ref_action'] = 'редактирования автора'
+        context['action'] = 'Редактирование'
         context['temp'] = self.kwargs
         return context
 
@@ -302,6 +304,8 @@ class ManufactorerRefDeleteView(DeleteView):
         context['ref_action'] = 'удаление изгатовителя'
         context['temp'] = self.kwargs
         return context
+
+
 
 
 
