@@ -20,7 +20,9 @@
         <li class="list-group-item">Количество товаров, добавленных за текущий месяц: {{ cr_now_month }}</li>
         <li class="list-group-item">Товаров по жанрам: <br>
             {% for key, value in book_genre_count.items %}
-               {{ key }}: {{ value }}<p>
+                {% if value != 0 %}
+                    {{ key }}: {{ value }}<br>
+                {% endif %}
             {% endfor %}
         </li>
         <li class="list-group-item">Всего категорий (жанров): {{ genre_count }}</li>
