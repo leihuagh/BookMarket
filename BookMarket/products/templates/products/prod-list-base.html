@@ -1,8 +1,10 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
+
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
+    <link rel="stylesheet" href="{% static '/products/product.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
 {% block title %}
@@ -10,18 +12,47 @@
 {% endblock title %}
 
 {% block body %}
-    <a href="{% url 'AdminShopCore' %}" class="badge badge-primary">Назад в административный портал</a><p>
-    <h1>{{ descr }}</h1>
-    <a href=" {{ get_create_url }} " class="badge badge-primary">Добавить</a><p>
+    <h1>
+        <form action="{{ get_create_url }}">
+            {{ descr }}
+            {% if user.is_authenticated %}
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Добавить
+                </button>
+            {% endif %}
+        </form>
+    </h1>
     <table class="table table-striped">
-    {% for object in object_list %}
-        <tr>
-            <td>{{ object.name }}</td>
-            <td>{{ object.description }}</td>
-            <td><a href="{% url 'products:book-prod-view' object.pk%}" class="badge badge-primary">Просмотреть</a></td>
-            <td><a href="{% url 'products:book-prod-update' object.pk%}" class="badge badge-primary">Обновить</a></td>
-            <td><a href="{% url 'products:book-prod-delete' object.pk%}" class="badge badge-danger">Удалить</a></td>
-        </tr>
-    {% endfor %}
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object }}</td>
+                <td >
+                    <form action="{% url 'products:book-prod-view' object.pk %}">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="far fa-eye"></i>
+                            Просмотреть
+                        </button>
+                    </form>
+                </td>
+                {% if user.is_authenticated %}
+                    <td>
+                        <form action="{% url 'products:book-prod-update' object.pk %}">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                                Редактировать
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'products:book-prod-delete' object.pk %}">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                                Удалить
+                            </button>
+                        </form>
+                    </td>
+                {% endif %}
+        {% endfor %}
     </table>
 {% endblock body %}

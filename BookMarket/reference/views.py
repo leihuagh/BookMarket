@@ -1,12 +1,25 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, TemplateView
 
-# Create your views here.
-from .forms import AuthorRefForm, GenreRefForm, SeriesRefForm, PublisherRefForm, \
-    ManufacturerRefForm
+from .forms import AuthorRefForm, GenreRefForm, SeriesRefForm, PublisherRefForm, ManufacturerRefForm
 
 from .models import Author, Genre, Series, Publisher, Manufacturer
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
+from django.apps import apps
+from random import choice
+
+# Create your views here.
+
+BTN_BLOCKS = [
+    "btn btn-primary",
+    "btn btn-secondary",
+    "btn btn-success",
+    "btn btn-danger",
+    "btn btn-warning",
+    "btn btn-info",
+    "btn btn-light",
+    "btn btn-dark"
+]
 
 
 # Просмотр, подробно, создание обновление и удаление АВТОРА
@@ -304,6 +317,36 @@ class ManufactorerRefDeleteView(DeleteView):
         context['ref_action'] = 'удаление изгатовителя'
         context['temp'] = self.kwargs
         return context
+
+
+class ListReferenceTemplateView(TemplateView):
+    template_name = 'reference/ref_all_list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        models = []
+        lst = [':author-ref-list',
+               ':genre-ref-list',
+               ':series-ref-list',
+               ':publisher-ref-list',
+               ':manufacturer-ref-list'
+               ]
+        j = 0
+        context = super().get_context_data(*args, **kwargs)
+        context['active'] = 'reference'
+        context['app_name'] = apps.get_app_config('reference')
+        for i in context['app_name'].get_models():
+            models.append(
+                (
+                    i._meta.verbose_name_plural,
+                    i._meta.app_label + lst[j],
+                    choice(BTN_BLOCKS)
+                )
+            )
+            j += 1
+        context['models'] = models
+
+        return context
+
 
 
 

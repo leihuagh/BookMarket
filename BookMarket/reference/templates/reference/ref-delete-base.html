@@ -1,5 +1,6 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     <title>Удаление {{ object.name }}</title>
@@ -10,15 +11,14 @@
 {% endblock head %}
 
 {% block body %}
-    <h1>Представление для {{ ref_action }}</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        Значение <p>
-        <b>{{ object.name }}<p></b>
-        Описание <p>
-        <b>{{ object.description }}<p></b>
-        <button type="submit" class="btn btn-danger">удалить</button>
-        <button type="button" class="btn btn-secondary" onclick="history.go(-1);">Назад</button>
-    </form>
+
+        <h1>Представление для {{ ref_action }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            Значение <p>
+            <b>{{ object.name }}<p></b>
+            <button type="submit" class="btn btn-danger">удалить</button>
+            <button type="button" class="btn btn-secondary" onclick="history.go(-1);">Назад</button>
+        </form>
 {% endblock body %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from reference.models import Author, Series, Genre, Publisher, Manufacturer
+import datetime
 
 # Create your models here.
 
@@ -20,6 +21,7 @@ class Book(models.Model):
         max_length=50,
         verbose_name='название'
     )
+
     cover_image = models.ImageField(
         verbose_name='обложка',
         default=None,
@@ -42,7 +44,8 @@ class Book(models.Model):
         Series,
         verbose_name='серия',
         on_delete=models.CASCADE,
-        default=None
+        default=None,
+        related_name='books'
     )
 
     genre = models.ManyToManyField(
@@ -122,7 +125,7 @@ class Book(models.Model):
 
     created = models.DateField(
         verbose_name='дата внесения в каталог',
-        default=None,
+        default=datetime.date.today(),
         blank=True,
         null=True
     )
@@ -137,6 +140,13 @@ class Book(models.Model):
     def get_view_url(self):
         return '/admin-shop/products/book-prod-view/{}/'.format(self.pk)
 
+    def get_field(self):
+        flds = dict((field.verbose_name, field.value_to_string(self)) for field in self._meta.fields)
+        flds.pop('ID', None)
+        return flds
+
     def __str__(self):
         return self.name
+
+
 

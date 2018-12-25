@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from products.forms import ProductsForm
 from products.models import Book
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 # Create your views here.
 
 
@@ -14,6 +14,7 @@ class BookProdListView(ListView):
         context = super(BookProdListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'книги'
         context['get_create_url'] = reverse_lazy('products:book-prod-create')
+        context['active'] = 'products'
         return context
 
 
@@ -24,7 +25,7 @@ class BookProdCreateView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdCreateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'добавления книги'
+        context['prod_action'] = 'добавления книги'
         return context
 
 
@@ -46,7 +47,7 @@ class BookProdUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdUpdateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'редактирования книги'
+        context['prod_action'] = 'редактирования книги'
         context['temp'] = self.kwargs
         context['get_update_url'] = reverse_lazy('products:book-prod-update')
         return context
@@ -60,6 +61,6 @@ class BookProdDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdDeleteView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'удаления книги'
-        #context['temp'] = self.kwargs
+        context['prod_action'] = 'удаления книги'
         return context
+

@@ -15,14 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import UserHomeTemplateView
-from admincore.views import CoreAdminTemplateView
+from core.views import UserHomeTemplateView, AboutTemplateView, DeliveryTemplateView
+from admincore.views import CoreAdminTemplateView, DashboardAdminView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin-shop/core/', CoreAdminTemplateView.as_view(), name='AdminShopCore'),
+    path('admin-shop/dashboard/', DashboardAdminView.as_view(), name='AdminShopDashboard'),
     path('admin-shop/reference/', include('reference.urls')),
     path('admin-shop/products/', include('products.urls')),
     path('', UserHomeTemplateView.as_view(), name='Core'),
+    path('about', AboutTemplateView.as_view(), name='About'),
+    path('delivery', DeliveryTemplateView.as_view(), name='Delivery'),
+
 ]

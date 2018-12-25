@@ -1,4 +1,4 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {# вставить переменную #}
@@ -8,11 +8,18 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
 {% block body %}
-    <h1>{{ descr }}</h1>
-    Значение <p>
-    <b>{{ object.name }}</b><p>
-    <a href="javascript:history.go(-1)" class="badge badge-primary">Назад</a><p>
+    <h1>{{ object.name }}</h1>
+    {% for q, w in object.get_field.items %}
+        {{ q }}: {{ w }}<br>
+    {% endfor %}
+    <form action="javascript:history.go(-1)">
+        <button type="submit" class="btn btn-secondary">
+            <i class="fas fa-undo"></i>
+            Назад
+        </button>
+    </form>
 {% endblock body %}

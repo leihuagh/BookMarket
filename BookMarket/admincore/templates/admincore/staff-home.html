@@ -1,8 +1,8 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block title %}
-    <title>Домашняяя страница администратора</title>
+    <title>Главная страница административного портала</title>
 {% endblock title %}
 
 {% block head %}
@@ -11,15 +11,4 @@
 
 {% block body %}
     <h1>Главная страница административного портала</h1><p>
-    <div class="list-group">
-        <a href="{% url 'reference:author-ref-list' %}" class="list-group-item list-group-item-action">Список авторов</a>
-        <a href="{% url 'reference:genre-ref-list' %}" class="list-group-item list-group-item-action">Список жанров</a>
-        <a href="{% url 'reference:series-ref-list' %}" class="list-group-item list-group-item-action">Список серий</a>
-        <a href="{% url 'reference:publisher-ref-list' %}" class="list-group-item list-group-item-action">Список издательств</a>
-        <a href="{% url 'reference:manufacturer-ref-list'%}" class="list-group-item list-group-item-action">Список изгатовителей</a>
-    </div>
-    <p>
-    <div class="list-group">
-        <a href="{% url 'products:book-prod-list' %}" class="list-group-item list-group-item-action">Список книг</a>
-    </div>
 {% endblock body %}

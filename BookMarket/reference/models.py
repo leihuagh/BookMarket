@@ -76,6 +76,7 @@ class Series(models.Model):
         verbose_name='о серии'
     )
 
+
     def get_update_url(self):
         return '/admin-shop/reference/series-ref-update/{}/'.format(self.pk)
 

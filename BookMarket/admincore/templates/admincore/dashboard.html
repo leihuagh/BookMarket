@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Статистика</title>
+{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/core/core.css' %}"/>
+{% endblock head %}
+
+{% block body %}
+    <h1>Статистика</h1><p>
+    <div class="card" style="max-width: 40rem;">
+      <ul class="list-group list-group-flush shadow p-3 mb-6">
+        <li class="list-group-item">Всего товаров в магазине: {{ product_count }}</li>
+        <li class="list-group-item">Всего товаров в наличии: {{ av_product_count }}</li>
+        <li class="list-group-item">Количество товаров, добавленных вчера: {{ cr_yesterday }}</li>
+        <li class="list-group-item">Количество товаров, добавленных в прошлом месяце: {{ cr_last_month }}</li>
+        <li class="list-group-item">Количество товаров, добавленных за текущий месяц: {{ cr_now_month }}</li>
+        <li class="list-group-item">Товаров по жанрам: <br>
+            {% for key, value in book_genre_count.items %}
+               {{ key }}: {{ value }}<p>
+            {% endfor %}
+        </li>
+        <li class="list-group-item">Всего категорий (жанров): {{ genre_count }}</li>
+      </ul>
+    </div>
+{% endblock body %}

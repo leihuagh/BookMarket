@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Справочники</title>
+{% endblock title %}
+
+{% block head%}
+    <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
+{% endblock head %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for model in models %}
+                <div class="col-lg-3 col-sm-12" style="padding: 10px">
+                <a href="{% url model.1 %}" class="btn btn-block {{ model.2 }} btn-lg">{{ model.0 }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

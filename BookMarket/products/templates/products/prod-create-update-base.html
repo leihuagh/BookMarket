@@ -1,9 +1,10 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static '/products/product.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
 {% block title %}
@@ -12,15 +13,19 @@
 
 {% block body %}
     <div class="container">
-    <h1>Представления для {{ ref_action }}</h1>
-    {{ temp }}
+    <h1>Представления для {{ prod_action }}</h1>
+    {# {{ temp }} #}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
-        <div style="padding-left: 2%">
-        <button type="submit" class="btn btn-primary btn-sm">отправить</button>
-        <button type="button" class="btn btn-secondary btn-sm"  onclick="history.go(-1);">Назад</button>
-        </div>
+        <button type="submit" class="btn btn-primary">
+        <i class="fas fa-check"></i>
+        Отправить
+        </button>
+        <button type="submit" class="btn btn-secondary" onclick="history.go(-1);">
+        <i class="fas fa-undo"></i>
+        Назад
+        </button>
     </form>
     </div>
 {% endblock body %}

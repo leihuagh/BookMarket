@@ -1,4 +1,4 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
 
 {% load static %}
 
@@ -16,5 +16,10 @@
     <b>{{ object.name }}</b><p>
     Описание <p>
     <b>{{ object.description }}</b><p>
-    <a href="javascript:history.go(-1)" class="badge badge-primary">Назад</a><p>
+    <form action="javascript:history.go(-1)">
+        <button type="submit" class="btn btn-secondary">
+            <i class="fas fa-undo"></i>
+            Назад
+        </button>
+    </form>
 {% endblock body %}

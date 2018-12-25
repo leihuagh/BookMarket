@@ -1,4 +1,4 @@
-{% extends 'base/admin_base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block title %}
@@ -7,57 +7,168 @@
 
 {% block head%}
     <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
 {% block body %}
-    <a href="{% url 'AdminShopCore' %} " class="badge badge-primary">Назад в административный портал</a><p>
-    <h1>{{ descr }}</h1>
-    <a href=" {{ get_create_url }} " class="badge badge-primary">Добавить</a><p>
+    <h1>
+    <form action="{{ get_create_url }}">
+        {{ descr }}
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+            Добавить
+        </button>
+    </form>
+    </h1>
     <table class="table table-striped">
     {% for object in object_list %}
         <tr>
         {% if descr == 'Авторы'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:author-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
-            <td><a href="{% url 'reference:author-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
-            <td><a href="{% url 'reference:author-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
+            <td >
+                <form action="{% url 'reference:author-ref-detail' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-eye"></i>
+                        Просмотреть
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:author-ref-update' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:author-ref-delete' object.pk %}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Удалить
+                    </button>
+                </form>
+            </td>
         {% endif %}
 
         {% if descr == 'Жанры'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:genre-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
-            <td><a href="{% url 'reference:genre-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
-            <td><a href="{% url 'reference:genre-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
+            <td >
+                <form action="{% url 'reference:genre-ref-detail' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-eye"></i>
+                        Просмотреть
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:genre-ref-update' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:genre-ref-delete' object.pk %}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Удалить
+                    </button>
+                </form>
+            </td>
         {% endif %}
 
-        {% if descr == 'Серии'%}
+         {% if descr == 'Серии'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:series-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
-            <td><a href="{% url 'reference:series-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
-            <td><a href="{% url 'reference:series-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
+            <td >
+                <form action="{% url 'reference:series-ref-detail' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-eye"></i>
+                        Просмотреть
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:series-ref-update' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:series-ref-delete' object.pk %}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Удалить
+                    </button>
+                </form>
+            </td>
         {% endif %}
+
 
          {% if descr == 'Издательства'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:publisher-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
-            <td><a href="{% url 'reference:publisher-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
-            <td><a href="{% url 'reference:publisher-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
+            <td >
+                <form action="{% url 'reference:publisher-ref-detail' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-eye"></i>
+                        Просмотреть
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:publisher-ref-update' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:publisher-ref-delete' object.pk %}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Удалить
+                    </button>
+                </form>
+            </td>
         {% endif %}
+
 
          {% if descr == 'Изгатовители'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
-            <td><a href="{% url 'reference:manufacturer-ref-detail' object.pk %}" class="badge badge-primary">Просмотреть</a></td>
-            <td><a href="{% url 'reference:manufacturer-ref-update' object.pk %}" class="badge badge-primary">Обновить</a></td>
-            <td><a href="{% url 'reference:manufacturer-ref-delete' object.pk %}" class="badge badge-danger">Удалить</a></td>
+            <td >
+                <form action="{% url 'reference:manufacturer-ref-detail' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-eye"></i>
+                        Просмотреть
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:manufacturer-ref-update' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:manufacturer-ref-delete' object.pk %}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Удалить
+                    </button>
+                </form>
+            </td>
         {% endif %}
-        {% for m, n in ref_list %}
-            {{ m }}
-        {% endfor %}
         </tr>
     {% endfor %}
     </table>
