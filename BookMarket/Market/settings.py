@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'products',
     'core',
     'admincore',
+    'cart',
 
     'crispy_forms',
 ]
@@ -127,9 +128,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#collect static
-#STATIC_ROOT
-#MEDIA_ROOT
+# collect static
+
+# STATIC_ROOT
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_NAME = 'Best book store'

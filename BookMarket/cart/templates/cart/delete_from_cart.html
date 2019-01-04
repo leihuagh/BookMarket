@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Удаление {{ object.name }}</title>
+{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
+{% endblock head %}
+
+{% block body %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <b>{{ object.book }}<p></b>
+            <button type="submit" class="btn btn-danger">удалить</button>
+            <button type="button" class="btn btn-secondary" onclick="history.go(-1);">Назад</button>
+        </form>
+{% endblock body %}

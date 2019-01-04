@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
 from core.views import UserHomeTemplateView, AboutTemplateView, DeliveryTemplateView
 from admincore.views import CoreAdminTemplateView, DashboardAdminView
+from django.conf import settings
 
 
 urlpatterns = [
@@ -29,4 +31,7 @@ urlpatterns = [
     path('about', AboutTemplateView.as_view(), name='About'),
     path('delivery', DeliveryTemplateView.as_view(), name='Delivery'),
 
-]
+    path('cart/', include('cart.urls')),
+
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

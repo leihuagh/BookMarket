@@ -13,6 +13,7 @@
 
 {% block body %}
     <h1>{{ object.name }}</h1>
+    <img class="card-img-top" src="{% if book.cover_image %}{{ book.cover_image.url }} {% endif %}" alt="Card image cap">
     {% for q, w in object.get_field.items %}
         {{ q }}: {{ w }}<br>
     {% endfor %}

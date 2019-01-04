@@ -8,3 +8,23 @@
 {% block head %}
     <link rel="stylesheet" href="{% static '/core/core.css' %}"/>
 {% endblock head %}
+
+{%  block body %}
+    <h2 align="center">Последние поступления</h2>
+    <div class="container">
+        <div class="row">
+        {% for book in last_book %}
+            <div class="col-sm-12 col-lg-3">
+                <br>
+                <div class="card" style="width: 16rem; padding: 20px;">
+                  <img class="card-img-top" src="{% if book.cover_image %}{{ book.cover_image.url }} {% endif %}" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">{% for author in book.authors.all %}<b>{{ author }}</b>{% endfor %}<br> {{ book.name }}</p>
+                  </div>
+                 <a href="{% url 'cart:add' book.pk %}" class="btn btn-primary">добавить в корзину</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock body %}
