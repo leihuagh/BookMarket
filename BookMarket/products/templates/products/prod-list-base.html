@@ -26,7 +26,12 @@
     <table class="table table-striped">
         {% for object in object_list %}
             <tr>
-                <td>{{ object }}</td>
+                <td>
+                    <i>{{ object }}</i>
+                    {% for author in object.authors.all %}
+                    <br>{{ author }}
+                    {% endfor %}
+                </td>
                 <td >
                     <form action="{% url 'products:book-prod-view' object.pk %}">
                         <button type="submit" class="btn btn-primary">

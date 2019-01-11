@@ -47,6 +47,7 @@ class ProductsInCart(models.Model):
         related_name='products',
         on_delete=models.CASCADE
     )
+    # product
     book = models.ForeignKey(
         Book,
         related_name='product_in_cart',

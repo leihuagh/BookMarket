@@ -48,7 +48,15 @@ from reference.views import (
     ManufactorerRefUpdateView,
     ManufactorerRefDeleteView,
 
-    ListReferenceTemplateView)
+    ListReferenceTemplateView,
+
+    OrderStatusRefListView,
+    OrderStatusRefCreateView,
+    OrderStatusRefUpdateView,
+    OrderStatusRefDetailView,
+    OrderStatusRefDeleteView,
+
+)
 
 # для иерархии
 app_name = 'reference'
@@ -89,5 +97,11 @@ urlpatterns = [
     path('manufacturer-ref-detail/<int:pk>/', ManufacturerRefDetailView.as_view(), name='manufacturer-ref-detail'),
     path('manufacturer-ref-delete/<int:pk>/', ManufactorerRefDeleteView.as_view(), name='manufacturer-ref-delete'),
 
-    path('all-ref-list/', ListReferenceTemplateView.as_view(), name='all-ref-list'),
+    path('ref-all-list/', ListReferenceTemplateView.as_view(), name='ref-all-list'),
+
+    path('order-status-ref-list/', OrderStatusRefListView.as_view(), name='order-status-ref-list'),
+    path('order-status-ref-create/', OrderStatusRefCreateView.as_view(), name='order-status-ref-create'),
+    path('order-status-ref-update/<int:pk>/', OrderStatusRefUpdateView.as_view(), name='order-status-ref-update'),
+    path('order-status-ref-detail/<int:pk>/', OrderStatusRefDetailView.as_view(), name='order-status-ref-detail'),
+    path('order-status-ref-delete/<int:pk>/', OrderStatusRefDeleteView.as_view(), name='order-status-ref-delete'),
 ]

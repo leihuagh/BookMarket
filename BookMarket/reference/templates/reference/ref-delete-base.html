@@ -8,17 +8,31 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
 {% block body %}
-
-        <h1>Представление для {{ ref_action }}</h1>
+    <div class="container">
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            Значение <p>
-            <b>{{ object.name }}<p></b>
-            <button type="submit" class="btn btn-danger">удалить</button>
-            <button type="button" class="btn btn-secondary" onclick="history.go(-1);">Назад</button>
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ ref_action }}</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ object.name }}</h4>
+                    <p class="card-text">{{ object.description }}</p>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        удалить
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="history.go(-1);">
+                        <i class="fas fa-undo"></i>
+                        Назад
+                    </button>
+                </div>
+            </div>
         </form>
+    </div>
 {% endblock body %}

@@ -1,9 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView, TemplateView
-
-from .forms import AuthorRefForm, GenreRefForm, SeriesRefForm, PublisherRefForm, ManufacturerRefForm
-
-from .models import Author, Genre, Series, Publisher, Manufacturer
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, TemplateView, DetailView
+from .forms import AuthorRefForm, GenreRefForm, SeriesRefForm, PublisherRefForm, ManufacturerRefForm, OrderStatusRefForm
+from .models import Author, Genre, Series, Publisher, Manufacturer, OrderStatus
 from django.urls import reverse_lazy
 from django.apps import apps
 from random import choice
@@ -22,7 +20,7 @@ BTN_BLOCKS = [
 ]
 
 
-# Просмотр, подробно, создание обновление и удаление АВТОРА
+# CRUD для АВТОРА
 class AuthorRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Author
@@ -34,7 +32,7 @@ class AuthorRefListView(ListView):
         return context
 
 
-class AuthorRefDetailView(DeleteView):
+class AuthorRefDetailView(DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Author
 
@@ -49,11 +47,9 @@ class AuthorRefCreateView(CreateView):
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:author-ref-list')
 
-
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefCreateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'создания нового автора'
-        context['action'] = 'Создание'
+        context['ref_action'] = 'Добавление нового автора'
         return context
 
 
@@ -65,8 +61,7 @@ class AuthorRefUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefUpdateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'редактирования автора'
-        context['action'] = 'Редактирование'
+        context['ref_action'] = 'Редактирование автора'
         context['temp'] = self.kwargs
         return context
 
@@ -79,12 +74,13 @@ class AuthorRefDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefDeleteView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'удаления автора'
+        context['ref_action'] = 'Удаление автора'
         context['temp'] = self.kwargs
         return context
 
 
-# Просмотр, подробно, создание обновление и удаление ЖАНРА ============================================
+# ====================================================================================
+# CRUD для ЖАНРА
 class GenreRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Genre
@@ -103,11 +99,11 @@ class GenreRefCreateView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefCreateView, self).get_context_data(*args, **kwargs)
-        context['descr'] = 'Создание жанра'
+        context['ref_action'] = 'Добавление нового жанра'
         return context
 
 
-class GenreRefDetailView(DeleteView):
+class GenreRefDetailView(DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Genre
 
@@ -125,7 +121,7 @@ class GenreRefUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefUpdateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'редактирования жанра'
+        context['ref_action'] = 'Редактирование жанра'
         context['temp'] = self.kwargs
         return context
 
@@ -138,12 +134,13 @@ class GenreRefDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefDeleteView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'удаления жанра'
+        context['ref_action'] = 'Удаление жанра'
         context['temp'] = self.kwargs
         return context
 
 
-# Просмотр, подробно, создание обновление и удаление СЕРИИ======================================
+# ====================================================================================
+# CRUD для СЕРИИ
 class SeriesRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Series
@@ -162,7 +159,7 @@ class SeriesRefCreateView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefCreateView, self).get_context_data(*args, **kwargs)
-        context['descr'] = 'Создание серии'
+        context['ref_action'] = 'Добавление новой серии'
         return context
 
 
@@ -174,11 +171,11 @@ class SeriesRefUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefUpdateView, self).get_context_data(*args, **kwargs)
-        context['descr'] = 'Редактирования серии'
+        context['ref_action'] = 'Редактирование серии'
         return context
 
 
-class SeriesRefDetailView(DeleteView):
+class SeriesRefDetailView(DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Series
 
@@ -196,12 +193,13 @@ class SeriesRefDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefDeleteView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'удаления серии'
+        context['ref_action'] = 'Удаление серии'
         context['temp'] = self.kwargs
         return context
 
 
-# Просмотр, подробно, создание обновление и удаление ИЗДАТЕЛЬСТВА======================================
+# ====================================================================================
+# CRUD для ИЗДАТЕЛЬСТВА
 class PublisherRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Publisher
@@ -213,7 +211,7 @@ class PublisherRefListView(ListView):
         return context
 
 
-class PublisherRefDetailView(DeleteView):
+class PublisherRefDetailView(DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Publisher
 
@@ -230,7 +228,7 @@ class PublisherRefCreateView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefCreateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'создания издательства'
+        context['ref_action'] = 'Добавление нового издательства'
         context['temp'] = self.kwargs
         return context
 
@@ -243,7 +241,7 @@ class PublisherRefUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefUpdateView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'редактирования издательства'
+        context['ref_action'] = 'Редактирование издательства'
         context['temp'] = self.kwargs
         return context
 
@@ -256,12 +254,13 @@ class PublisherRefDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefDeleteView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'удаления издательства'
+        context['ref_action'] = 'Удаление издательства'
         context['temp'] = self.kwargs
         return context
 
 
-# Просмотр, подробно, создание обновление и удаление ИЗГАТОВИТЕЛЯ======================================
+# ====================================================================================
+# CRUD для ИЗГАТОВИТЕЛЯ
 class ManufacturerRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Manufacturer
@@ -280,11 +279,11 @@ class ManufacturerRefCreateView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefCreateView, self).get_context_data(*args, **kwargs)
-        context['descr'] = 'добавление изгатовителя'
+        context['ref_action'] = 'Добавление нового изгатовителя'
         return context
 
 
-class ManufacturerRefDetailView(DeleteView):
+class ManufacturerRefDetailView(DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Manufacturer
 
@@ -302,7 +301,7 @@ class ManufactorerRefUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufactorerRefUpdateView, self).get_context_data(*args, **kwargs)
-        context['descr'] = 'редактировать изгатовителя'
+        context['ref_action'] = 'Редактирование изгатовителя'
         return context
 
 
@@ -314,37 +313,87 @@ class ManufactorerRefDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufactorerRefDeleteView, self).get_context_data(*args, **kwargs)
-        context['ref_action'] = 'удаление изгатовителя'
+        context['ref_action'] = 'Удаление изгатовителя'
         context['temp'] = self.kwargs
         return context
 
 
+# Класс для отображения всех моделей приложения reference
 class ListReferenceTemplateView(TemplateView):
     template_name = 'reference/ref_all_list.html'
 
     def get_context_data(self, *args, **kwargs):
-        models = []
-        lst = [':author-ref-list',
-               ':genre-ref-list',
-               ':series-ref-list',
-               ':publisher-ref-list',
-               ':manufacturer-ref-list'
-               ]
-        j = 0
         context = super().get_context_data(*args, **kwargs)
+        models = []
         context['active'] = 'reference'
         context['app_name'] = apps.get_app_config('reference')
         for i in context['app_name'].get_models():
             models.append(
                 (
                     i._meta.verbose_name_plural,
-                    i._meta.app_label + lst[j],
+                    i._meta.model.lst_url,
                     choice(BTN_BLOCKS)
                 )
             )
-            j += 1
         context['models'] = models
 
+        return context
+
+
+# ====================================================================================
+# CRUD для СТАТУСОВ ЗАКАЗА
+class OrderStatusRefListView(ListView):
+    template_name = 'reference/ref-list-base.html'
+    model = OrderStatus
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['descr'] = 'Статусы заказа'
+        context['get_create_url'] = reverse_lazy('reference:order-status-ref-create')
+        return context
+
+
+class OrderStatusRefCreateView(CreateView):
+    template_name = 'reference/ref-create-update-base.html'
+    form_class = OrderStatusRefForm
+    success_url = reverse_lazy('reference:order-status-ref-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_action'] = 'Добавление нового статуса заказа'
+        return context
+
+
+class OrderStatusRefUpdateView(UpdateView):
+    template_name = 'reference/ref-create-update-base.html'
+    form_class = OrderStatusRefForm
+    success_url = reverse_lazy('reference:order-status-ref-list')
+    model = OrderStatus
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_action'] = 'Редактирование статуса заказа'
+        return context
+
+
+class OrderStatusRefDetailView(DetailView):
+    template_name = 'reference/ref-view-base.html'
+    model = OrderStatus
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['descr'] = 'Статус заказа'
+        return context
+
+
+class OrderStatusRefDeleteView(DeleteView):
+    model = OrderStatus
+    success_url = reverse_lazy('reference:order-status-ref-list')
+    template_name = 'reference/ref-delete-base.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ref_action'] = 'Удаление cтатуса заказа'
         return context
 
 

@@ -1,33 +1,27 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 # Create your models here.
 
 
 class Author(models.Model):
+    # reverse_lazy не работает
+    lst_url = 'reference:author-ref-list'
 
     class Meta:
         verbose_name_plural = 'авторы'
         verbose_name = 'автор'
 
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name='автор',
         default=None
     )
     description = models.CharField(
         max_length=200,
-        verbose_name='об авторе',
+        verbose_name='описание автора',
         blank=True,
     )
-
-    #def get_update_url(self):
-        #return '/admin-shop/reference/author-ref-update/{}/'.format(self.pk)
-
-    def get_view_url(self):
-        return '/admin-shop/reference/author-ref-detail/{}/'.format(self.pk)
-
-    def get_delete_url(self):
-        return '/admin-shop/reference/author-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
@@ -35,27 +29,20 @@ class Author(models.Model):
 
 class Genre(models.Model):
 
+    lst_url = 'reference:genre-ref-list'
+
     class Meta:
         verbose_name_plural = 'жанры'
         verbose_name = 'жанр'
 
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name='жанр'
     )
     description = models.CharField(
         max_length=200,
-        verbose_name='о жанре'
+        verbose_name='описание жанра'
     )
-
-    def get_update_url(self):
-        return '/admin-shop/reference/genre-ref-update/{}/'.format(self.pk)
-
-    def get_view_url(self):
-        return '/admin-shop/reference/genre-ref-detail/{}/'.format(self.pk)
-
-    def get_delete_url(self):
-        return '/admin-shop/reference/genre-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
@@ -63,28 +50,20 @@ class Genre(models.Model):
 
 class Series(models.Model):
 
+    lst_url = 'reference:series-ref-list'
+
     class Meta:
         verbose_name_plural = 'серии'
         verbose_name = 'серия'
 
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name='серия'
     )
     description = models.CharField(
         max_length=200,
-        verbose_name='о серии'
+        verbose_name='описание серии'
     )
-
-
-    def get_update_url(self):
-        return '/admin-shop/reference/series-ref-update/{}/'.format(self.pk)
-
-    def get_view_url(self):
-        return '/admin-shop/reference/series-ref-detail/{}/'.format(self.pk)
-
-    def get_delete_url(self):
-        return '/admin-shop/reference/series-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
@@ -92,27 +71,20 @@ class Series(models.Model):
 
 class Publisher(models.Model):
 
+    lst_url = 'reference:publisher-ref-list'
+
     class Meta:
-        verbose_name_plural = 'Издательства'
-        verbose_name = 'Издательство'
+        verbose_name_plural = 'издательства'
+        verbose_name = 'издательство'
 
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name='издательство'
     )
     description = models.CharField(
         max_length=200,
-        verbose_name='об издательстве'
+        verbose_name='описание издательства'
     )
-
-    def get_update_url(self):
-        return '/admin-shop/reference/publisher-ref-update/{}/'.format(self.pk)
-
-    def get_view_url(self):
-        return '/admin-shop/reference/publisher-ref-detail/{}/'.format(self.pk)
-
-    def get_delete_url(self):
-        return '/admin-shop/reference/publisher-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
@@ -120,30 +92,43 @@ class Publisher(models.Model):
 
 class Manufacturer(models.Model):
 
+    lst_url = 'reference:manufacturer-ref-list'
+
     class Meta:
-        verbose_name_plural = 'Изгатовители'
-        verbose_name = 'Изгатовитель'
+        verbose_name_plural = 'изгатовители'
+        verbose_name = 'изгатовитель'
 
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name='изгатовитель'
     )
     description = models.CharField(
         max_length=200,
-        verbose_name='об изгатовителе'
+        verbose_name='описание изгатовителя'
     )
-
-    def get_update_url(self):
-        return '/admin-shop/reference/manufacturer-ref-update/{}/'.format(self.pk)
-
-    def get_view_url(self):
-        return '/admin-shop/reference/manufacturer-ref-detail/{}/'.format(self.pk)
-
-    def get_delete_url(self):
-        return '/admin-shop/reference/manufacturer-ref-delete/{}/'.format(self.pk)
 
     def __str__(self):
         return self.name
 
 
+class OrderStatus(models.Model):
+
+    lst_url = 'reference:order-status-ref-list'
+
+    class Meta:
+        verbose_name_plural = 'cтатусы заказов'
+        verbose_name = 'cтатус заказа'
+
+    name = models.CharField(
+        max_length=100,
+        verbose_name='cтатус'
+    )
+
+    description = models.CharField(
+        max_length=200,
+        verbose_name='описание статуса'
+    )
+
+    def __str__(self):
+        return self.name
 

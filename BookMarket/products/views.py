@@ -25,7 +25,7 @@ class BookProdCreateView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdCreateView, self).get_context_data(*args, **kwargs)
-        context['prod_action'] = 'добавления книги'
+        context['prod_action'] = 'Добавление новой книги'
         return context
 
 
@@ -47,7 +47,7 @@ class BookProdUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdUpdateView, self).get_context_data(*args, **kwargs)
-        context['prod_action'] = 'редактирования книги'
+        context['prod_action'] = 'Редактирование книги'
         context['temp'] = self.kwargs
         context['get_update_url'] = reverse_lazy('products:book-prod-update')
         return context
@@ -61,6 +61,6 @@ class BookProdDeleteView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdDeleteView, self).get_context_data(*args, **kwargs)
-        context['prod_action'] = 'удаления книги'
+        context['prod_action'] = 'Удаление книги'
         return context
 

@@ -1,14 +1,8 @@
 from django.db import models
-from django.core.exceptions import ValidationError
 from reference.models import Author, Series, Genre, Publisher, Manufacturer
 import datetime
 
 # Create your models here.
-
-
-def my_validator(val):
-    if val != 5:
-        raise ValidationError('Price must be 5')
 
 
 class Book(models.Model):
@@ -137,12 +131,11 @@ class Book(models.Model):
         null=True
     )
 
-    def get_view_url(self):
-        return '/admin-shop/products/book-prod-view/{}/'.format(self.pk)
-
     def get_field(self):
         flds = dict((field.verbose_name, field.value_to_string(self)) for field in self._meta.fields)
         flds.pop('ID', None)
+        flds.pop('название', None)
+        flds.pop('обложка', None)
         return flds
 
     def __str__(self):

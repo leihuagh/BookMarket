@@ -7,15 +7,16 @@ from products.models import Book
 # Create your views here.
 
 
-class UserHomeTemplateView(TemplateView):
-    template_name = 'core/user-home.html'
+class HomeTemplateView(TemplateView):
+    template_name = 'core/home.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         last_book = Book.objects.all()
         context['SITE_NAME'] = settings.SITE_NAME
         context['active'] = 'core'
-        context['last_book'] = last_book[len(last_book)-5:len(last_book)]
+        last_added_book_count = 8
+        context['last_book'] = last_book[len(last_book)-last_added_book_count:len(last_book)]
         return context
 
 

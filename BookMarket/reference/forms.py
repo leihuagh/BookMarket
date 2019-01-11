@@ -1,5 +1,5 @@
 from django import forms
-from reference.models import Author, Genre, Series, Publisher, Manufacturer
+from reference.models import Author, Genre, Series, Publisher, Manufacturer, OrderStatus
 
 
 class AuthorRefForm(forms.ModelForm):
@@ -45,6 +45,16 @@ class PublisherRefForm(forms.ModelForm):
 class ManufacturerRefForm(forms.ModelForm):
     class Meta:
         model = Manufacturer
+
+        fields = [
+            'name',
+            'description'
+        ]
+
+
+class OrderStatusRefForm(forms.ModelForm):
+    class Meta:
+        model = OrderStatus
 
         fields = [
             'name',

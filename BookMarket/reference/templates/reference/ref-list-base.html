@@ -169,6 +169,35 @@
                 </form>
             </td>
         {% endif %}
+
+        {% if descr == 'Статусы заказа'%}
+            <td>{{ object.name }}</td>
+            <td>{{ object.description }}</td>
+            <td>
+                <form action="{% url 'reference:order-status-ref-update' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button>
+                </form>
+            </td>
+            <td >
+                <form action="{% url 'reference:order-status-ref-detail' object.pk %}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-eye"></i>
+                        Просмотреть
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'reference:order-status-ref-delete' object.pk %}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        {% endif %}
         </tr>
     {% endfor %}
     </table>

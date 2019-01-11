@@ -10,8 +10,9 @@
 {% endblock head %}
 
 {% block body %}
+    <div class="container">
     <h1>Статистика</h1><p>
-    <div class="card" style="max-width: 40rem;">
+    <div class="card" style="max-width: 70rem;">
       <ul class="list-group list-group-flush shadow p-3 mb-6">
         <li class="list-group-item">Всего товаров в магазине: {{ product_count }}</li>
         <li class="list-group-item">Всего товаров в наличии: {{ av_product_count }}</li>
@@ -27,5 +28,6 @@
         </li>
         <li class="list-group-item">Всего категорий (жанров): {{ genre_count }}</li>
       </ul>
+    </div>
     </div>
 {% endblock body %}

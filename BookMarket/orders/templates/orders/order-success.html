@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Заказ оформлен</title>
+{% endblock title %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static '/core/core.css' %}"/>
+{% endblock head %}
+
+{% block body %}
+  {# доделать красоту #}
+  {{ object }}
+{% endblock body %}

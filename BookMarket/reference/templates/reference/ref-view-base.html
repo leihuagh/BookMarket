@@ -11,15 +11,21 @@
 {% endblock head %}
 
 {% block body %}
-    <h1>{{ descr }}</h1>
-    Значение <p>
-    <b>{{ object.name }}</b><p>
-    Описание <p>
-    <b>{{ object.description }}</b><p>
-    <form action="javascript:history.go(-1)">
-        <button type="submit" class="btn btn-secondary">
-            <i class="fas fa-undo"></i>
-            Назад
-        </button>
-    </form>
+    <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <h3>{{ descr }}</h3>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{ object.name }}</h4>
+            <p class="card-text">{{ object.description }}</p>
+            <form action="javascript:history.go(-1)">
+            <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-undo"></i>
+                Назад
+            </button>
+            </form>
+          </div>
+        </div>
+    </div>
 {% endblock body %}
