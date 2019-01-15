@@ -6,23 +6,24 @@
 {% endblock title %}
 
 {% block head%}
-    <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
 {% block body %}
+    <div class="container">
     <h1>
     <form action="{{ get_create_url }}">
-        {{ descr }}
+        <div align="left">{{ descr }}
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-plus"></i>
             Добавить
         </button>
+        </div>
     </form>
     </h1>
     <table class="table table-striped">
     {% for object in object_list %}
-        <tr>
+        <tr align="left">
         {% if descr == 'Авторы'%}
             <td>{{ object.name }}</td>
             <td>{{ object.description }}</td>
@@ -200,5 +201,10 @@
         {% endif %}
         </tr>
     {% endfor %}
+
     </table>
+
+    {% include 'base/paginator/paginator-base.html' %}
+
+    </div>
 {% endblock body %}

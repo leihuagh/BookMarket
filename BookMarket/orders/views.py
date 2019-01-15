@@ -26,6 +26,12 @@ class SuccessOrderView(DetailView):
 class ListOrderView(ListView):
     model = Orders
     template_name = 'orders/order-list.html'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'list_order'
+        return context
 
 
 class DetailOrderView(DetailView):

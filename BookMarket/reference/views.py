@@ -24,6 +24,7 @@ BTN_BLOCKS = [
 class AuthorRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Author
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefListView, self).get_context_data(*args, **kwargs)
@@ -84,6 +85,7 @@ class AuthorRefDeleteView(DeleteView):
 class GenreRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Genre
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefListView, self).get_context_data(*args, **kwargs)
@@ -144,6 +146,7 @@ class GenreRefDeleteView(DeleteView):
 class SeriesRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Series
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefListView, self).get_context_data(*args, **kwargs)
@@ -203,6 +206,7 @@ class SeriesRefDeleteView(DeleteView):
 class PublisherRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Publisher
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefListView, self).get_context_data(*args, **kwargs)
@@ -264,6 +268,7 @@ class PublisherRefDeleteView(DeleteView):
 class ManufacturerRefListView(ListView):
     template_name = "reference/ref-list-base.html"
     model = Manufacturer
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefListView, self).get_context_data(*args, **kwargs)
@@ -345,6 +350,7 @@ class ListReferenceTemplateView(TemplateView):
 class OrderStatusRefListView(ListView):
     template_name = 'reference/ref-list-base.html'
     model = OrderStatus
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

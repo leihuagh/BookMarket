@@ -6,7 +6,6 @@
 {% endblock title %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static '/core/core.css' %}"/>
 {% endblock head %}
 
 {% block body %}
@@ -35,5 +34,8 @@
         {% endfor %}
           </tbody>
     </table>
+
+      {% include 'base/paginator/paginator-base.html' %}
+
       </div>
 {% endblock body %}

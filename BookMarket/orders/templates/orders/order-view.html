@@ -7,7 +7,6 @@
 {% endblock title %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static '/reference/reference.css' %}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 {% endblock head %}
 
@@ -17,13 +16,14 @@
           <div class="card-header">
               <h4 align="center">Информация о заказе</h4>
           </div>
-          <div class="card-body">
+          <div align="left" class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                 <h4><i>{{ object }}</i>
                 </h4>
                 </li>
                 <li class="list-group-item">Статус: {{ object.status }}</li>
+                <li class="list-group-item">Пользователь: {{ object.cart.user }}</li>
                 <li class="list-group-item">Электронный адрес: {{ object.email }}</li>
                 <li class="list-group-item">Адрес доставки: {{ object.delivery_address }}</li>
                 <li class="list-group-item">Телефон: {{ object.phone }}</li>

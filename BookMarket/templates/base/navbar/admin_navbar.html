@@ -19,6 +19,9 @@
       <li class="nav-item {% if active == 'dashboard' %} active {% endif %}">
         <a class="nav-link" href="{% url 'AdminShopDashboard' %}">Статистика</a>
       </li>
+      <li class="nav-item {% if active == 'list_order' %} active {% endif %}">
+        <a class="nav-link" href="{% url 'orders:list-orders' %}">Список заказов</a>
+      </li>
       <li class="nav-item {% if active == 'delivery' %} active {% endif %}">
         <a class="nav-link" href="{% url 'Delivery' %}">Доставка (to do)</a>
       </li>
@@ -27,19 +30,18 @@
       </li>
     </ul>
 
-    {% top_cart_icon %}
-
-    <div class="dropdown open">
+  <div class="dropdown open">
       <button class="btn btn-secondary btn-sm dropleft dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Администратор
+        Административный портал
       </button>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'orders:list-orders' %}">Список заказов</a>
-        <a class="dropdown-item" href="#">to do</a>
-        <a class="dropdown-item" href="#">to do</a>
+        <a class="dropdown-item" href="#">Профиль (to do)</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Разлогиниться/залогиниться</a>
+        <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
       </div>
     </div>
+
+
+
   </div>
 </nav>

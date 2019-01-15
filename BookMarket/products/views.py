@@ -9,12 +9,14 @@ from django.urls import reverse_lazy
 class BookProdListView(ListView):
     template_name = 'products/prod-list-base.html'
     model = Book
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdListView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'книги'
         context['get_create_url'] = reverse_lazy('products:book-prod-create')
         context['active'] = 'products'
+
         return context
 
 
