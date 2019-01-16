@@ -5,6 +5,7 @@ from .models import Author, Genre, Series, Publisher, Manufacturer, OrderStatus
 from django.urls import reverse_lazy
 from django.apps import apps
 from random import choice
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 # Create your views here.
 
@@ -21,7 +22,8 @@ BTN_BLOCKS = [
 
 
 # CRUD для АВТОРА
-class AuthorRefListView(ListView):
+class AuthorRefListView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
     template_name = "reference/ref-list-base.html"
     model = Author
     paginate_by = 10
@@ -33,9 +35,11 @@ class AuthorRefListView(ListView):
         return context
 
 
-class AuthorRefDetailView(DetailView):
+class AuthorRefDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Author
+
+    permission_required = 'reference.view_author'
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefDetailView, self).get_context_data(*args, **kwargs)
@@ -43,7 +47,7 @@ class AuthorRefDetailView(DetailView):
         return context
 
 
-class AuthorRefCreateView(CreateView):
+class AuthorRefCreateView(LoginRequiredMixin, CreateView):
     form_class = AuthorRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:author-ref-list')

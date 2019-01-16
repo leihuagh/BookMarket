@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import CoreAdminTemplateView, DashboardAdminView
+from .views import CoreAdminTemplateView, DashboardAdminView, index
 
 
 urlpatterns = [
       path('core/', CoreAdminTemplateView.as_view(), name='AdminShopCore'),
       path('dashboard/', DashboardAdminView.as_view(), name='AdminShopDashboard'),
+
+      path('send/', index),
 ]

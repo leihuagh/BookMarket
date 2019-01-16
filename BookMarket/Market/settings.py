@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'orders',
 
     'crispy_forms',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,9 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -144,3 +148,16 @@ SITE_NAME = 'Best book store'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+
+INTERNAL_IPS = '127.100.0.1'
+
+# send mail
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'kovalski9911'
+EMAIL_HOST_PASSWORD = '159357aA'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+
