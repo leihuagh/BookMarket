@@ -22,11 +22,12 @@ BTN_BLOCKS = [
 
 
 # CRUD для АВТОРА
-class AuthorRefListView(LoginRequiredMixin, ListView):
-    login_url = '/login/'
+class AuthorRefListView(PermissionRequiredMixin, ListView):
     template_name = "reference/ref-list-base.html"
     model = Author
     paginate_by = 10
+
+    permission_required = 'reference.view_author'
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefListView, self).get_context_data(*args, **kwargs)
@@ -47,10 +48,12 @@ class AuthorRefDetailView(PermissionRequiredMixin, DetailView):
         return context
 
 
-class AuthorRefCreateView(LoginRequiredMixin, CreateView):
+class AuthorRefCreateView(PermissionRequiredMixin, CreateView):
     form_class = AuthorRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:author-ref-list')
+
+    permission_required = 'reference.add_author'
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefCreateView, self).get_context_data(*args, **kwargs)
@@ -58,11 +61,13 @@ class AuthorRefCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class AuthorRefUpdateView(UpdateView):
+class AuthorRefUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = AuthorRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:author-ref-list')
     model = Author
+
+    permission_required = 'reference.change_author'
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefUpdateView, self).get_context_data(*args, **kwargs)
@@ -71,11 +76,13 @@ class AuthorRefUpdateView(UpdateView):
         return context
 
 
-class AuthorRefDeleteView(DeleteView):
+class AuthorRefDeleteView(PermissionRequiredMixin, DeleteView):
     form_class = AuthorRefForm
     template_name = 'reference/ref-delete-base.html'
     success_url = reverse_lazy('reference:author-ref-list')
     model = Author
+
+    permission_required = 'reference.delete_author'
 
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorRefDeleteView, self).get_context_data(*args, **kwargs)
@@ -86,10 +93,12 @@ class AuthorRefDeleteView(DeleteView):
 
 # ====================================================================================
 # CRUD для ЖАНРА
-class GenreRefListView(ListView):
+class GenreRefListView(PermissionRequiredMixin, ListView):
     template_name = "reference/ref-list-base.html"
     model = Genre
     paginate_by = 10
+
+    permission_required = 'reference.view_genre'
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefListView, self).get_context_data(*args, **kwargs)
@@ -98,10 +107,12 @@ class GenreRefListView(ListView):
         return context
 
 
-class GenreRefCreateView(CreateView):
+class GenreRefCreateView(PermissionRequiredMixin, CreateView):
     form_class = GenreRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:genre-ref-list')
+
+    permission_required = 'reference.add_genre'
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefCreateView, self).get_context_data(*args, **kwargs)
@@ -109,9 +120,11 @@ class GenreRefCreateView(CreateView):
         return context
 
 
-class GenreRefDetailView(DetailView):
+class GenreRefDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Genre
+
+    permission_required = 'reference.view_genre'
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefDetailView, self).get_context_data(*args, **kwargs)
@@ -119,11 +132,13 @@ class GenreRefDetailView(DetailView):
         return context
 
 
-class GenreRefUpdateView(UpdateView):
+class GenreRefUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = GenreRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:genre-ref-list')
     model = Genre
+
+    permission_required = 'reference.change_genre'
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefUpdateView, self).get_context_data(*args, **kwargs)
@@ -132,11 +147,13 @@ class GenreRefUpdateView(UpdateView):
         return context
 
 
-class GenreRefDeleteView(DeleteView):
+class GenreRefDeleteView(PermissionRequiredMixin, DeleteView):
     form_class = GenreRefForm
     template_name = 'reference/ref-delete-base.html'
     success_url = reverse_lazy('reference:genre-ref-list')
     model = Genre
+
+    permission_required = 'reference.delete_genre'
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenreRefDeleteView, self).get_context_data(*args, **kwargs)
@@ -147,10 +164,12 @@ class GenreRefDeleteView(DeleteView):
 
 # ====================================================================================
 # CRUD для СЕРИИ
-class SeriesRefListView(ListView):
+class SeriesRefListView(PermissionRequiredMixin, ListView):
     template_name = "reference/ref-list-base.html"
     model = Series
     paginate_by = 10
+
+    permission_required = 'reference.view_series'
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefListView, self).get_context_data(*args, **kwargs)
@@ -159,10 +178,12 @@ class SeriesRefListView(ListView):
         return context
 
 
-class SeriesRefCreateView(CreateView):
+class SeriesRefCreateView(PermissionRequiredMixin, CreateView):
     form_class = SeriesRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:series-ref-list')
+
+    permission_required = 'reference.add_series'
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefCreateView, self).get_context_data(*args, **kwargs)
@@ -170,11 +191,13 @@ class SeriesRefCreateView(CreateView):
         return context
 
 
-class SeriesRefUpdateView(UpdateView):
+class SeriesRefUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = SeriesRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:series-ref-list')
     model = Series
+
+    permission_required = 'reference.change_series'
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefUpdateView, self).get_context_data(*args, **kwargs)
@@ -182,9 +205,11 @@ class SeriesRefUpdateView(UpdateView):
         return context
 
 
-class SeriesRefDetailView(DetailView):
+class SeriesRefDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Series
+
+    permission_required = 'reference.view_series'
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefDetailView, self).get_context_data(*args, **kwargs)
@@ -192,11 +217,13 @@ class SeriesRefDetailView(DetailView):
         return context
 
 
-class SeriesRefDeleteView(DeleteView):
+class SeriesRefDeleteView(PermissionRequiredMixin, DeleteView):
     form_class = SeriesRefForm
     template_name = 'reference/ref-delete-base.html'
     success_url = reverse_lazy('reference:series-ref-list')
     model = Series
+
+    permission_required = 'reference.delete_series'
 
     def get_context_data(self, *args, **kwargs):
         context = super(SeriesRefDeleteView, self).get_context_data(*args, **kwargs)
@@ -207,10 +234,12 @@ class SeriesRefDeleteView(DeleteView):
 
 # ====================================================================================
 # CRUD для ИЗДАТЕЛЬСТВА
-class PublisherRefListView(ListView):
+class PublisherRefListView(PermissionRequiredMixin, ListView):
     template_name = "reference/ref-list-base.html"
     model = Publisher
     paginate_by = 10
+
+    permission_required = 'reference.view_publisher'
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefListView, self).get_context_data(*args, **kwargs)
@@ -219,9 +248,11 @@ class PublisherRefListView(ListView):
         return context
 
 
-class PublisherRefDetailView(DetailView):
+class PublisherRefDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Publisher
+
+    permission_required = 'reference.view_publisher'
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefDetailView, self).get_context_data(*args, **kwargs)
@@ -229,10 +260,12 @@ class PublisherRefDetailView(DetailView):
         return context
 
 
-class PublisherRefCreateView(CreateView):
+class PublisherRefCreateView(PermissionRequiredMixin, CreateView):
     form_class = PublisherRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:publisher-ref-list')
+
+    permission_required = 'reference.add_publisher'
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefCreateView, self).get_context_data(*args, **kwargs)
@@ -241,11 +274,13 @@ class PublisherRefCreateView(CreateView):
         return context
 
 
-class PublisherRefUpdateView(UpdateView):
+class PublisherRefUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = PublisherRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:publisher-ref-list')
     model = Publisher
+
+    permission_required = 'reference.change_publisher'
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefUpdateView, self).get_context_data(*args, **kwargs)
@@ -254,11 +289,13 @@ class PublisherRefUpdateView(UpdateView):
         return context
 
 
-class PublisherRefDeleteView(DeleteView):
+class PublisherRefDeleteView(PermissionRequiredMixin, DeleteView):
     form_class = PublisherRefForm
     template_name = 'reference/ref-delete-base.html'
     success_url = reverse_lazy('reference:publisher-ref-list')
     model = Publisher
+
+    permission_required = 'reference.delete_publisher'
 
     def get_context_data(self, *args, **kwargs):
         context = super(PublisherRefDeleteView, self).get_context_data(*args, **kwargs)
@@ -269,10 +306,12 @@ class PublisherRefDeleteView(DeleteView):
 
 # ====================================================================================
 # CRUD для ИЗГАТОВИТЕЛЯ
-class ManufacturerRefListView(ListView):
+class ManufacturerRefListView(PermissionRequiredMixin, ListView):
     template_name = "reference/ref-list-base.html"
     model = Manufacturer
     paginate_by = 10
+
+    permission_required = 'reference.view_manufacturer'
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefListView, self).get_context_data(*args, **kwargs)
@@ -281,10 +320,12 @@ class ManufacturerRefListView(ListView):
         return context
 
 
-class ManufacturerRefCreateView(CreateView):
+class ManufacturerRefCreateView(PermissionRequiredMixin, CreateView):
     form_class = ManufacturerRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:manufacturer-ref-list')
+
+    permission_required = 'reference.add_manufacturer'
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefCreateView, self).get_context_data(*args, **kwargs)
@@ -292,9 +333,11 @@ class ManufacturerRefCreateView(CreateView):
         return context
 
 
-class ManufacturerRefDetailView(DetailView):
+class ManufacturerRefDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'reference/ref-view-base.html'
     model = Manufacturer
+
+    permission_required = 'reference.view_manufacturer'
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufacturerRefDetailView, self).get_context_data(*args, **kwargs)
@@ -302,11 +345,13 @@ class ManufacturerRefDetailView(DetailView):
         return context
 
 
-class ManufactorerRefUpdateView(UpdateView):
+class ManufactorerRefUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = ManufacturerRefForm
     template_name = 'reference/ref-create-update-base.html'
     success_url = reverse_lazy('reference:manufacturer-ref-list')
     model = Manufacturer
+
+    permission_required = 'reference.change_manufacturer'
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufactorerRefUpdateView, self).get_context_data(*args, **kwargs)
@@ -314,11 +359,13 @@ class ManufactorerRefUpdateView(UpdateView):
         return context
 
 
-class ManufactorerRefDeleteView(DeleteView):
+class ManufactorerRefDeleteView(PermissionRequiredMixin, DeleteView):
     form_class = ManufacturerRefForm
     template_name = 'reference/ref-delete-base.html'
     success_url = reverse_lazy('reference:manufacturer-ref-list')
     model = Manufacturer
+
+    permission_required = 'reference.delete_manufacturer'
 
     def get_context_data(self, *args, **kwargs):
         context = super(ManufactorerRefDeleteView, self).get_context_data(*args, **kwargs)
@@ -351,10 +398,12 @@ class ListReferenceTemplateView(TemplateView):
 
 # ====================================================================================
 # CRUD для СТАТУСОВ ЗАКАЗА
-class OrderStatusRefListView(ListView):
+class OrderStatusRefListView(PermissionRequiredMixin, ListView):
     template_name = 'reference/ref-list-base.html'
     model = OrderStatus
     paginate_by = 10
+
+    permission_required = 'reference.view_order-status'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -363,10 +412,12 @@ class OrderStatusRefListView(ListView):
         return context
 
 
-class OrderStatusRefCreateView(CreateView):
+class OrderStatusRefCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'reference/ref-create-update-base.html'
     form_class = OrderStatusRefForm
     success_url = reverse_lazy('reference:order-status-ref-list')
+
+    permission_required = 'reference.add_order-status'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -374,11 +425,13 @@ class OrderStatusRefCreateView(CreateView):
         return context
 
 
-class OrderStatusRefUpdateView(UpdateView):
+class OrderStatusRefUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'reference/ref-create-update-base.html'
     form_class = OrderStatusRefForm
     success_url = reverse_lazy('reference:order-status-ref-list')
     model = OrderStatus
+
+    permission_required = 'reference.change_order-status'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -386,9 +439,11 @@ class OrderStatusRefUpdateView(UpdateView):
         return context
 
 
-class OrderStatusRefDetailView(DetailView):
+class OrderStatusRefDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'reference/ref-view-base.html'
     model = OrderStatus
+
+    permission_required = 'reference.view_order-status'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -396,10 +451,12 @@ class OrderStatusRefDetailView(DetailView):
         return context
 
 
-class OrderStatusRefDeleteView(DeleteView):
+class OrderStatusRefDeleteView(PermissionRequiredMixin, DeleteView):
     model = OrderStatus
     success_url = reverse_lazy('reference:order-status-ref-list')
     template_name = 'reference/ref-delete-base.html'
+
+    permission_required = 'reference.delete_order-status'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

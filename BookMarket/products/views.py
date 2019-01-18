@@ -3,6 +3,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from products.forms import ProductsForm
 from products.models import Book
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
 # Create your views here.
 
 
@@ -20,10 +21,12 @@ class BookProdListView(ListView):
         return context
 
 
-class BookProdCreateView(CreateView):
+class BookProdCreateView(PermissionRequiredMixin, CreateView):
     form_class = ProductsForm
     template_name = 'products/prod-create-update-base.html'
     success_url = reverse_lazy('products:book-prod-list')
+
+    permission_required = 'product.add_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdCreateView, self).get_context_data(*args, **kwargs)
@@ -41,11 +44,13 @@ class BookProdDetailView(DetailView):
         return context
 
 
-class BookProdUpdateView(UpdateView):
+class BookProdUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = ProductsForm
     template_name = 'products/prod-create-update-base.html'
     success_url = reverse_lazy('products:book-prod-list')
     model = Book
+
+    permission_required = 'product.change_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdUpdateView, self).get_context_data(*args, **kwargs)
@@ -55,11 +60,13 @@ class BookProdUpdateView(UpdateView):
         return context
 
 
-class BookProdDeleteView(DeleteView):
+class BookProdDeleteView(PermissionRequiredMixin, DeleteView):
     form_class = ProductsForm
     template_name = 'products/prod-delete-base.html'
     success_url = reverse_lazy('products:book-prod-list')
     model = Book
+
+    permission_required = 'product.delete_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdDeleteView, self).get_context_data(*args, **kwargs)

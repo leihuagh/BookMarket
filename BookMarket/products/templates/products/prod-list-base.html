@@ -14,7 +14,7 @@
     <h1>
         <form action="{{ get_create_url }}">
             <div align="left">{{ descr }}
-            {% if user.is_authenticated %}
+            {% if perms.products.add_book %}
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-plus"></i>
                     Добавить
@@ -40,7 +40,7 @@
                         </button>
                     </form>
                 </td>
-                {% if user.is_authenticated %}
+                {% if perms.products.change_book %}
                     <td>
                         <form action="{% url 'products:book-prod-update' object.pk %}">
                             <button type="submit" class="btn btn-primary">
@@ -49,6 +49,8 @@
                             </button>
                         </form>
                     </td>
+                    {% endif %}
+            {% if perms.products.delete_book %}
                     <td>
                         <form action="{% url 'products:book-prod-delete' object.pk %}">
                             <button type="submit" class="btn btn-danger">

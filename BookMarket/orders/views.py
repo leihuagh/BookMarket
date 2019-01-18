@@ -4,6 +4,7 @@ from .models import Orders
 from .forms import OrderForm, UpdateOrderForm
 from django.urls import reverse_lazy
 from reference.models import OrderStatus
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 
@@ -23,10 +24,12 @@ class SuccessOrderView(DetailView):
     template_name = 'orders/order-success.html'
 
 
-class ListOrderView(ListView):
+class ListOrderView(PermissionRequiredMixin, ListView):
     model = Orders
     template_name = 'orders/order-list.html'
     paginate_by = 5
+
+    permission_required = 'orders.view_order'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,9 +37,11 @@ class ListOrderView(ListView):
         return context
 
 
-class DetailOrderView(DetailView):
+class DetailOrderView(PermissionRequiredMixin, DetailView):
     model = Orders
     template_name = 'orders/order-view.html'
+
+    permission_required = 'orders.view_order'
 
     def get_object(self, queryset=None):
         order_status = OrderStatus.objects.get(name='Принят')
@@ -46,16 +51,20 @@ class DetailOrderView(DetailView):
         return order
 
 
-class UpdateOrderView(UpdateView):
+class UpdateOrderView(PermissionRequiredMixin, UpdateView):
     model = Orders
     template_name = 'orders/order-update.html'
     form_class = UpdateOrderForm
+
+    permission_required = 'orders.change_order'
 
     def get_success_url(self):
         return reverse_lazy('orders:detail-orders', kwargs={'pk': self.object.pk})
 
 
-class DeleteOrderView(DeleteView):
+class DeleteOrderView(PermissionRequiredMixin, DeleteView):
     model = Orders
     template_name = 'orders/order-delete.html'
     success_url = reverse_lazy('orders:list-orders')
+
+    permission_required = 'orders.delete_order'
