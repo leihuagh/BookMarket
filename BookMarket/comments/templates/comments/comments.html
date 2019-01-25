@@ -1,0 +1,23 @@
+<div><h4>Комментарии</h4></div>
+<div class="container" align="left">
+{% for comment in comments %}
+    {{ comment.user }}:<br>
+    {{ comment }}<br><br>
+{% endfor %}
+
+
+<form method="POST" action="{% url 'comments:comments_add' %}">
+    {% csrf_token %}
+    <div>
+        <br>
+        <label for="comments">Добавить комментарий</label>
+        <input type="text" name="comments" class="form-control" id="comments">
+        <input type="hidden" name="ct_id" class="form-control" id="ct" value="{{ ct }}">
+        <input type="hidden" name="obj_id" class="form-control" id="obj_id" value="{{ obj_id }}">
+        <input type="hidden" name="next" class="form-control" id="next" value="{{ next }}">
+    </div>
+    <br>
+    <button type="submit">добавить</button>
+</form>
+<br>
+</div>

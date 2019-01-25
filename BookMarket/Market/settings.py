@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'admincore',
     'cart',
     'orders',
+    'prfs',
+    'comments',
+
 
     'crispy_forms',
     'debug_toolbar',

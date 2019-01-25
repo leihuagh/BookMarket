@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {# вставить переменную #}
 {% block title %}
@@ -33,4 +34,20 @@
           </button>
         </div>
     </div>
+
+    {% comment %} комментарии без кастомного тега {% endcomment %}
+    <div class="container" align="left">
+        <div><h4>Комментарии</h4></div>
+        {% for comment in comments %}
+            {{ comment.user }}:<br>
+            {{ comment }}<br><br>
+        {% endfor %}
+    <form action="{% url 'comments:comments_create' %}" method="POST" class="card-body">
+    {% csrf_token %}
+    {{ comments_form|crispy }}
+    <button type="submit">добавить</button>
+    </form>
+    </div>
+
+
 {% endblock body %}

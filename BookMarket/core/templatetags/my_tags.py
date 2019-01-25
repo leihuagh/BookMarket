@@ -19,7 +19,6 @@ def top_cart_icon(context):
     }
 
 
-
 @register.filter('has_group')
 def has_group(user, group_name):
     groups = user.groups.all().values_list('name', flat=True)
