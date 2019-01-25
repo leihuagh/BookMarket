@@ -21,17 +21,11 @@ class CommentsAdd(RedirectView):
         user = self.request.user
         if ct_id and obj_id and comments:
             ct = ContentType.objects.get_for_id(ct_id)
-            comments, created = Comments.objects.get_or_create(
+            comments = Comments.objects.create(
                 user=user,
                 comments=comments,
                 content_type=ct,
                 object_id=obj_id,
-                defaults={
-                    'user': user,
-                    'comments': comments,
-                    'content_type': ct,
-                    'object_id': obj_id,
-                }
             )
         return next
 

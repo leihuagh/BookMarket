@@ -1,7 +1,8 @@
 <div><h4>Комментарии</h4></div>
 <div class="container" align="left">
 {% for comment in comments %}
-    {{ comment.user }}:<br>
+    <b>{{ comment.timestamp }}<br></b>
+    <b>{{ comment.user }}:<br></b>
     {{ comment }}<br><br>
 {% endfor %}
 
