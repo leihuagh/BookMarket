@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'orders',
     'prfs',
     'comments',
-
+    'search',
 
     'crispy_forms',
     'debug_toolbar',
@@ -159,7 +159,7 @@ INTERNAL_IPS = '127.100.0.1'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'kovalski9911@yandex.ru'
-EMAIL_HOST_PASSWORD = '159357aA'
+EMAIL_HOST_PASSWORD = 'my_password'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 

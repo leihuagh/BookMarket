@@ -21,9 +21,5 @@ from . import views
 app_name = 'comments'
 
 urlpatterns = [
-    # урл для добавления комментария через кастомный тег
     path('add', views.CommentsAdd.as_view(), name='comments_add'),
-
-    # урл для добавления комментария без кастомного тега
-    path('create', views.CommentCreate.as_view(), name='comments_create'),
 ]

@@ -24,6 +24,12 @@
 
     {% top_cart_icon %}
 
+     <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'makeSearch' %}">
+      <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  q
+
     {% if user.is_authenticated %}
         <div class="dropdown open">
       <button class="btn btn-secondary btn-sm dropleft dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

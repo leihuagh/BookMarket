@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from core.views import HomeTemplateView, AboutTemplateView, DeliveryTemplateView
 from django.conf import settings
+from search.views import MakeSearchView
 
 
 urlpatterns = [
@@ -32,6 +33,8 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
 
     path('comments/', include('comments.urls')),
+
+    path('makesearch/', MakeSearchView.as_view(), name='makeSearch'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 

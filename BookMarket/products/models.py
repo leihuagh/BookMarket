@@ -47,7 +47,8 @@ class Book(models.Model):
         verbose_name='жанр'
     )
 
-    date_of_published = models.DateField(
+    date_of_published = models.CharField(
+        max_length=4,
         verbose_name='год издания',
         default=None,
         blank=True,

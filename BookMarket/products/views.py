@@ -4,10 +4,6 @@ from products.forms import ProductsForm
 from products.models import Book
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from comments.forms import CommentsForm
-from django.contrib.contenttypes.models import ContentType
-from comments.models import Comments
-# Create your views here.
 
 
 class BookProdListView(ListView):
@@ -44,24 +40,6 @@ class BookProdDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdDetailView, self).get_context_data(*args, **kwargs)
         context['descr'] = 'Книги'
-        user = self.request.user
-
-        # реализация комментариев без кастомного тега
-        # инициализация формы значениями текущего продукта
-        ct = ContentType.objects.get_for_model(Book)
-        oi = self.kwargs.get('pk')
-        data = {
-            'user': user,
-            'content_type': ct,
-            'object_id': oi
-        }
-        context['comments_form'] = CommentsForm(initial=data)
-
-        context['comments'] = Comments.objects.filter(
-            content_type=ct,
-            object_id=oi,
-        )
-
         return context
 
 

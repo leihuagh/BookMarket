@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+результаты поиска по запросу "{{ search }}":
+    {% for result in results %}
+        <br><a href="{% url 'products:book-prod-view' result.pk %}">{{ result }}</a>
+    {% endfor %}
+
+{% endblock body %}
