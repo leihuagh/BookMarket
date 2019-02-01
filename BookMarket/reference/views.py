@@ -462,9 +462,3 @@ class OrderStatusRefDeleteView(PermissionRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['ref_action'] = 'Удаление cтатуса заказа'
         return context
-
-
-
-
-
-

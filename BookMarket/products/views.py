@@ -4,6 +4,8 @@ from products.forms import ProductsForm
 from products.models import Book
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.contenttypes.models import ContentType
+from comments.models import Comments
 
 
 class BookProdListView(ListView):

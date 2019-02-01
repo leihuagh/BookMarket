@@ -153,7 +153,7 @@ SITE_NAME = 'Best book store'
 LOGIN_REDIRECT_URL = '/'
 
 
-INTERNAL_IPS = '127.100.0.1'
+INTERNAL_IPS = '127.0.0.1'
 
 # send mail
 EMAIL_HOST = 'smtp.yandex.ru'

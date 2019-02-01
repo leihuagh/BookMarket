@@ -50,7 +50,7 @@
                         </form>
                     </td>
                     {% endif %}
-            {% if perms.products.delete_book %}
+                {% if perms.products.delete_book %}
                     <td>
                         <form action="{% url 'products:book-prod-delete' object.pk %}">
                             <button type="submit" class="btn btn-danger">
@@ -63,5 +63,27 @@
         {% endfor %}
     </table>
     {% include 'base/paginator/paginator-base.html' %}
+{% for object in object_list %}
+<div class="card" style="width: 70rem; height: 10rem;">
+  <div class="card-body">
+      <img class="card-img-top"
+          src="{% if object.cover_image %}{{ object.cover_image.url }} {% endif %}"
+          alt="Card image cap"
+          style="height: 7rem; width: 5rem"
+      align="left">
+    <h5 class="card-title" align="left" style="padding-left: 6rem">
+        <a href="{% url 'products:book-prod-view' object.pk %}">{{ object.name }}</a>
+    </h5>
+    <p class="card-text" align="left" style="padding-left: 6rem">
+        {% for author in object.authors.all %}
+                    автор: {{ author }}
+        {% endfor %}
+    </p>
+  </div>
+</div>
+     <br>
+    {% endfor %}
+
+
     </div>
 {% endblock body %}

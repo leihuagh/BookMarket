@@ -9,7 +9,7 @@ from reference.models import OrderStatus
 
 # Create your views here.
 
-base_order_status = OrderStatus.objects.get(name='В обработке')
+#base_order_status = OrderStatus.objects.get(name='В обработке')
 
 
 class AddProductCartView(UpdateView):
