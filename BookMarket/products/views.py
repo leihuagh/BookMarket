@@ -1,17 +1,18 @@
-from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from products.forms import ProductsForm
 from products.models import Book
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.contenttypes.models import ContentType
-from comments.models import Comments
 
 
 class BookProdListView(ListView):
     template_name = 'products/prod-list-base.html'
     model = Book
     paginate_by = 10
+
+    def get_queryset(self):
+        queryset = Book.objects.all().prefetch_related('authors')
+        return queryset
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdListView, self).get_context_data(*args, **kwargs)
@@ -27,7 +28,7 @@ class BookProdCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'products/prod-create-update-base.html'
     success_url = reverse_lazy('products:book-prod-list')
 
-    permission_required = 'product.add_book'
+    permission_required = 'products.add_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdCreateView, self).get_context_data(*args, **kwargs)
@@ -51,7 +52,7 @@ class BookProdUpdateView(PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('products:book-prod-list')
     model = Book
 
-    permission_required = 'product.change_book'
+    permission_required = 'products.change_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdUpdateView, self).get_context_data(*args, **kwargs)
@@ -67,7 +68,7 @@ class BookProdDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('products:book-prod-list')
     model = Book
 
-    permission_required = 'product.delete_book'
+    permission_required = 'products.delete_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdDeleteView, self).get_context_data(*args, **kwargs)

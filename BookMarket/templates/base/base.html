@@ -43,11 +43,7 @@
 {% block content %}
 {% endblock content %}
 
-  {% if user.is_superuser %}
-    {% include 'base/navbar/admin_navbar.html' %}
-  {% else %}
-    {% include 'base/navbar/user_navbar.html' %}
-  {% endif %}
+  {% include 'base/navbar/user_navbar.html' %}
 
   {# Блок для body #}
   {% block body %}

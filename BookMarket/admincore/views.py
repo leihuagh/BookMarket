@@ -1,12 +1,8 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from reference.models import Genre
 from products.models import Book
 from django.conf import settings
 import datetime
-
-from django.core.mail import send_mail
-# Create your views here.
 
 
 class CoreAdminTemplateView(TemplateView):
@@ -59,12 +55,3 @@ class DashboardAdminView(TemplateView):
         context['genre_count'] = len(Genre.objects.all())
 
         return context
-
-
-def index(request):
-    send_mail(
-        'subject',
-        'body of the message',
-        'kovalski9911@yandex.ru',
-        ['kovalski9911@yandex.ru'])
-    return render(request, 'admincore/send.html')

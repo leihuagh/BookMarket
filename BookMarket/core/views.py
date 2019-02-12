@@ -17,6 +17,7 @@ class HomeTemplateView(TemplateView):
         context['active'] = 'core'
         last_added_book_count = 8
         context['last_book'] = last_book[len(last_book)-last_added_book_count:len(last_book)]
+        print(kwargs)
         return context
 
 

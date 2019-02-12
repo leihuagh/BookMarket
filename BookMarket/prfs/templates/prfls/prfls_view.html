@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+  <div class="container" align="center">
+  <div class="card" style="width: 60rem;" align="left">
+  <div class="card-header">
+  {{ object.first_name }} {{ object.last_name }}
+  <div><a href="{% url 'prfls:prfls-update' user.pk %}">редактировать профиль</a></div>
+  </div>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b>Электронный адрес:</b> {{ object.email }}</li>
+      <li class="list-group-item"><b>логин:</b> {{ object }}</li>
+      <li class="list-group-item"><b>Адрес доставки:</b> {{ object.prf.delivery_address }}</li>
+      <li class="list-group-item"><b>Номер телефона:</b> {{ object.prf.phone_number }}</li>
+      <li class="list-group-item"><b>Мои заказы:</b><br>
+          {% for cart, products in user_order.items %}
+              заказ от {{ cart.created_date }}:
+              {% for product in products %}
+                  {{ product }}
+              {% endfor %}<br>
+          {% endfor %}
+      </li>
+
+
+  </ul>
+  </div>
+  </div>
+
+{% endblock body %}

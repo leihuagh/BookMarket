@@ -10,6 +10,10 @@ class Orders(models.Model):
     class Meta:
         verbose_name = 'Заказ',
         verbose_name_plural = 'Заказы'
+        permissions = (
+            ("can_view_order_custom", "Can view order custom"),
+        )
+
 
     cart = models.ForeignKey(
         Cart,

@@ -9,6 +9,11 @@ User = get_user_model()
 
 
 class Comments(models.Model):
+
+    class Meta:
+        verbose_name='комментарий',
+        verbose_name_plural='комментарии'
+
     comments = models.TextField(
         'Comments',
         default=None

@@ -1,5 +1,6 @@
 from django import template
 from cart.models import Cart
+import requests
 
 register = template.Library()
 
@@ -17,6 +18,16 @@ def top_cart_icon(context):
     return {
         'products': products
     }
+
+
+@register.inclusion_tag('core/exchange_rates.html', takes_context=True)
+def exchange_rates(context):
+    r = requests.get('http://www.nbrb.by/API/ExRates/Rates/145')
+    data = r.json()
+    cur_abbr = data['Cur_Abbreviation']
+    cur_rate = data['Cur_OfficialRate']
+    context['rate'] = '1 ' + cur_abbr + ': ' + str(cur_rate) + ' BYN'
+    return context
 
 
 @register.filter('has_group')

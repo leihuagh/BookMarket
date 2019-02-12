@@ -10,80 +10,47 @@
 {% endblock title %}
 
 {% block body %}
-    <div class="container">
+
+<div class="container">
     <h1>
-        <form action="{{ get_create_url }}">
-            <div align="left">{{ descr }}
-            {% if perms.products.add_book %}
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Добавить
-                </button>
-            {% endif %}
-            </div>
-        </form>
-    </h1>
-    <table class="table table-striped">
-        {% for object in object_list %}
-            <tr align="left">
-                <td>
-                    <i>{{ object }}</i>
-                    {% for author in object.authors.all %}
-                    <br>{{ author }}
-                    {% endfor %}
-                </td>
-                <td >
-                    <form action="{% url 'products:book-prod-view' object.pk %}">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="far fa-eye"></i>
-                            Просмотреть
-                        </button>
-                    </form>
-                </td>
-                {% if perms.products.change_book %}
-                    <td>
-                        <form action="{% url 'products:book-prod-update' object.pk %}">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                                Редактировать
-                            </button>
-                        </form>
-                    </td>
-                    {% endif %}
-                {% if perms.products.delete_book %}
-                    <td>
-                        <form action="{% url 'products:book-prod-delete' object.pk %}">
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i>
-                                Удалить
-                            </button>
-                        </form>
-                    </td>
-                {% endif %}
-        {% endfor %}
-    </table>
-    {% include 'base/paginator/paginator-base.html' %}
-{% for object in object_list %}
-<div class="card" style="width: 70rem; height: 10rem;">
-  <div class="card-body">
-      <img class="card-img-top"
-          src="{% if object.cover_image %}{{ object.cover_image.url }} {% endif %}"
-          alt="Card image cap"
-          style="height: 7rem; width: 5rem"
-      align="left">
-    <h5 class="card-title" align="left" style="padding-left: 6rem">
-        <a href="{% url 'products:book-prod-view' object.pk %}">{{ object.name }}</a>
-    </h5>
-    <p class="card-text" align="left" style="padding-left: 6rem">
-        {% for author in object.authors.all %}
-                    автор: {{ author }}
-        {% endfor %}
-    </p>
-  </div>
-</div>
-     <br>
-    {% endfor %}
-
-
+    <div align="left">{{ descr }}
+        {% if perms.products.add_book %}
+            <a class="btn btn-primary btn-sm active" href="{% url 'products:book-prod-create'%}">Добавить</a>
+        {% endif %}
     </div>
+    </h1>
+    
+    {% for object in object_list %}
+        <div class="card" style="width: 70rem; height: 10rem; margin-bottom: 1rem">
+        <div class="card-body">
+        <img class="card-img-top"
+            src="{% if object.cover_image %}{{ object.cover_image.url }} {% endif %}"
+            alt="Card image cap"
+            style="height: 7rem; width: 5rem"
+            align="left">
+        <h5 class="card-title" align="left" style="padding-left: 6rem">
+        <a href="{% url 'products:book-prod-view' object.pk %}">{{ object.name }}</a>
+        </h5>
+        <p class="card-text" align="left" style="padding-left: 6rem">
+        {% for author in object.authors.all %}
+            автор: {{ author }}
+        {% endfor %}
+        </p>
+        <p class="card-text" align="left" style="padding-left: 6rem">
+        {% if perms.products.delete_book %}
+        <a class="btn btn-danger btn-sm active" href="{% url 'products:book-prod-delete' object.pk %}">Удалить</a>
+        {% endif %}
+        {% if perms.products.change_book %}
+        <a class="btn btn-primary btn-sm active" href="{% url 'products:book-prod-update' object.pk %}">Редактировать</a>
+        {% endif %}
+        <a class="btn btn-primary btn-sm active" href="{% url 'cart:add' object.pk %}">Добавить в корзину</a>
+        </p>
+        </div>
+        </div>
+    {% endfor %}
+    <div style="margin-top: 1rem">
+        {% include 'base/paginator/paginator-base.html' %}
+    </div>
+</div>
+
 {% endblock body %}

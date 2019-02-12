@@ -31,9 +31,8 @@ urlpatterns = [
     path('delivery', DeliveryTemplateView.as_view(), name='Delivery'),
     path('cart/', include('cart.urls')),
     path('orders/', include('orders.urls')),
-
     path('comments/', include('comments.urls')),
-
+    path('prfls/', include('prfs.urls')),
     path('makesearch/', MakeSearchView.as_view(), name='makeSearch'),
 
     path('accounts/', include('django.contrib.auth.urls')),

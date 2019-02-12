@@ -6,10 +6,7 @@ from .models import ProductsInCart, Cart
 from products.models import Book
 from django.urls import reverse_lazy
 from reference.models import OrderStatus
-
-# Create your views here.
-
-#base_order_status = OrderStatus.objects.get(name='В обработке')
+from prfs.models import Prf
 
 
 class AddProductCartView(UpdateView):
@@ -82,7 +79,18 @@ class ListCartView(TemplateView):
             tot_pr += product.quantity * product.book.price
         context['total_price'] = tot_pr
 
-        data = {'cart': cart, 'status': base_order_status}
+        order_status, created = OrderStatus.objects.get_or_create(
+            name='В обработке',
+            description='Зака находится в обработке'
+        )
+
+        us_prfl = Prf.objects.get(customer_id=usr.id)
+        data = {'cart': cart,
+                'status': order_status,
+                'phone': us_prfl.phone_number,
+                'email': usr.email,
+                'delivery_address': us_prfl.delivery_address
+                }
         context['order_form'] = OrderForm(initial=data)
 
         return context
