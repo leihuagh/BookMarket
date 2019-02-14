@@ -27,7 +27,6 @@ class BookProdCreateView(PermissionRequiredMixin, CreateView):
     form_class = ProductsForm
     template_name = 'products/prod-create-update-base.html'
     success_url = reverse_lazy('products:book-prod-list')
-
     permission_required = 'products.add_book'
 
     def get_context_data(self, *args, **kwargs):
@@ -51,7 +50,6 @@ class BookProdUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'products/prod-create-update-base.html'
     success_url = reverse_lazy('products:book-prod-list')
     model = Book
-
     permission_required = 'products.change_book'
 
     def get_context_data(self, *args, **kwargs):
@@ -67,13 +65,9 @@ class BookProdDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'products/prod-delete-base.html'
     success_url = reverse_lazy('products:book-prod-list')
     model = Book
-
     permission_required = 'products.delete_book'
 
     def get_context_data(self, *args, **kwargs):
         context = super(BookProdDeleteView, self).get_context_data(*args, **kwargs)
         context['prod_action'] = 'Удаление книги'
         return context
-
-
-

@@ -1,10 +1,6 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.conf import settings
-
-
 from products.models import Book
-# Create your views here.
 
 
 class HomeTemplateView(TemplateView):
@@ -17,7 +13,6 @@ class HomeTemplateView(TemplateView):
         context['active'] = 'core'
         last_added_book_count = 8
         context['last_book'] = last_book[len(last_book)-last_added_book_count:len(last_book)]
-        print(kwargs)
         return context
 
 

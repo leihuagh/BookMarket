@@ -63,7 +63,6 @@ class PrflUpdateView(LoginRequiredMixin, FormView):
                              'phone_number': user.prf.phone_number
                              }
                 )
-
                 return my_form
             else:
                 my_form = PrflUpdateForm(self.request.POST)

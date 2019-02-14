@@ -1,10 +1,6 @@
-from django.shortcuts import render
 from django.views.generic.base import RedirectView
 from django.contrib.contenttypes.models import ContentType
-
 from .models import Comments
-
-# Create your views here.
 
 
 class CommentsAdd(RedirectView):

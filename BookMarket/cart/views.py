@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import UpdateView, TemplateView, DeleteView
 from .forms import AddToCartForm
 from orders.forms import OrderForm

@@ -36,7 +36,6 @@ class ListOrderView(PermissionRequiredMixin, ListView):
 class DetailOrderView(PermissionRequiredMixin, DetailView):
     model = Orders
     template_name = 'orders/order-view.html'
-
     permission_required = 'orders.can_view_order'
 
     def get_object(self, queryset=None):
@@ -54,8 +53,7 @@ class UpdateOrderView(PermissionRequiredMixin, UpdateView):
     model = Orders
     template_name = 'orders/order-update.html'
     form_class = UpdateOrderForm
-
-    permission_required = 'orders.can_view_order'
+    permission_required = 'orders.change_orders'
 
     def get_success_url(self):
         return reverse_lazy('orders:detail-orders', kwargs={'pk': self.object.pk})
@@ -65,5 +63,4 @@ class DeleteOrderView(PermissionRequiredMixin, DeleteView):
     model = Orders
     template_name = 'orders/order-delete.html'
     success_url = reverse_lazy('orders:list-orders')
-
-    permission_required = 'orders.can_view_order'
+    permission_required = 'orders.delete_orders'
